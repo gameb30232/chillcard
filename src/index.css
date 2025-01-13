@@ -99,3 +99,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  .controls {
+    display: none !important;
+  }
+
+  .crypto-card {
+    break-inside: avoid;
+  }
+}
