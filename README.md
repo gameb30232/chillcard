@@ -61,15 +61,7 @@ You can further customize the application by modifying the source code. Here are
 * **Styling:**  Modify the Tailwind CSS classes in the components to adjust the appearance of the cards and the overall application.
 * **Adding More Features:**  Consider adding features like exporting the card as an image, generating multiple cards at once, or adding a field for a custom network name.
 
-## Contributing
-
-[If you want to encourage contributions, add guidelines here.]
 
 ## License
 
 This project is licensed under the [MIT License](LICENSE) - see the `LICENSE` file for details.
-
-## Acknowledgements
-
-* This project utilizes the excellent libraries mentioned in the "Technologies Used" section.
-* Inspiration for the design and functionality comes from the need for secure and accessible cryptocurrency backup solutions.
