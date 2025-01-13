@@ -1,69 +1,75 @@
-# Welcome to your Lovable project
+## Getting Started
 
-## Project info
+Follow these steps to run the application locally:
 
-**URL**: https://lovable.dev/projects/3fb69803-cfe1-4db5-ab6b-9901d5e70e03
+### Prerequisites
 
-## How can I edit this code?
+* **Node.js:**  While Bun is the primary package manager, having Node.js installed is generally a good prerequisite for web development. You can download it from [nodejs.org](https://nodejs.org/).
+* **Bun:**  A fast JavaScript runtime and package manager. Ensure you have Bun installed on your system. You can find installation instructions on the [Bun website](https://bun.sh/).
 
-There are several ways of editing your application.
+### Installation
 
-**Use Lovable**
+1. **Clone the repository:**
+   ```bash
+   git clone git@github.com:gameb30232/papercard.git
+   cd papercard
+   ```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/3fb69803-cfe1-4db5-ab6b-9901d5e70e03) and start prompting.
+2. **Install dependencies:**
+   Using Bun:
+   ```bash
+   bun install
+   ```
 
-Changes made via Lovable will be committed automatically to this repo.
+### Running the Application
 
-**Use your preferred IDE**
+1. **Start the development server:**
+   Using Bun:
+   ```bash
+   bun run dev
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. **Open in your browser:**  The application should automatically open in your default web browser. If not, navigate to the address displayed in your terminal (likely `http://localhost:8080/`).
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Available Scripts
 
-Follow these steps:
+The following scripts are available in the `package.json` file:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+* **`dev`:** Starts the development server using Vite. Run with `bun run dev`.
+* **[Add other scripts from your `package.json` here, e.g., `build`: Builds the application for production. Run with `bun run build`. ]**
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Usage
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. **Pick a Crypto:** Choose the cryptocurrency you're backing up.
+2. **Enter Your Address:**  Type or paste your crypto wallet address.
+3. **Optional Background:**  Add a background image if you like.
+4. **Recovery Phrase Length:** Choose whether your recovery phrase is 12 or 24 words.
+5. **Card Layout:**  Pick a vertical or horizontal card.
+6. **Print It:** Click the "Print Cards" button to print your backup.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+### Printing Recommendations
 
-**Edit a file directly in GitHub**
+* **Enable Background Graphics:** For the best visual results, ensure that "Background graphics" or a similar option is enabled in your browser's print settings. This will ensure that the background color/image is printed.
+* **Card Stock (Optional):**  Printing on thicker card stock can improve the durability of your backup cards.
+* **Cut Carefully:** After printing, carefully cut out the generated cards along the edges.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Customization
 
-**Use GitHub Codespaces**
+You can further customize the application by modifying the source code. Here are some potential areas for customization:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+* **Adding More Cryptocurrencies:**  You can add more cryptocurrencies to the `CRYPTOCURRENCIES` array in `src/components/CryptoCardGenerator.tsx`. Include the `name`, `code`, `color`, and `logo` URL for each new cryptocurrency.
+* **Styling:**  Modify the Tailwind CSS classes in the components to adjust the appearance of the cards and the overall application.
+* **Adding More Features:**  Consider adding features like exporting the card as an image, generating multiple cards at once, or adding a field for a custom network name.
 
-## What technologies are used for this project?
+## Contributing
 
-This project is built with .
+[If you want to encourage contributions, add guidelines here.]
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## License
 
-## How can I deploy this project?
+This project is licensed under the [MIT License](LICENSE) - see the `LICENSE` file for details.
 
-Simply open [Lovable](https://lovable.dev/projects/3fb69803-cfe1-4db5-ab6b-9901d5e70e03) and click on Share -> Publish.
+## Acknowledgements
 
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+* This project utilizes the excellent libraries mentioned in the "Technologies Used" section.
+* Inspiration for the design and functionality comes from the need for secure and accessible cryptocurrency backup solutions.
