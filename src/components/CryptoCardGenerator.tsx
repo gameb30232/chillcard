@@ -122,14 +122,31 @@ export const CryptoCardGenerator = () => {
     <div className="container mx-auto py-8 px-4">
       <div className="max-w-6xl mx-auto space-y-8">
         <div className="controls space-y-4">
-          <div className="flex justify-between items-center">
-            <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-              Crypto Backup Card Generator
-            </h1>
-            <Button onClick={handlePrint} variant="outline" className="gap-2">
-              <Printer className="h-4 w-4" />
-              Print Cards
-            </Button>
+          <div className="space-y-2">
+            <div className="flex justify-between items-center">
+              <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                Crypto Backup Card Generator
+              </h1>
+              <div className="flex items-center gap-4">
+                <div className="text-sm text-muted-foreground">
+                  <p className="flex items-center gap-2">
+                    <span>💡</span>
+                    <span>
+                      Enable "Background graphics" in print settings for best
+                      results
+                    </span>
+                  </p>
+                </div>
+                <Button
+                  onClick={() => handlePrint()}
+                  variant="outline"
+                  className="gap-2"
+                >
+                  <Printer className="h-4 w-4" />
+                  Print Cards
+                </Button>
+              </div>
+            </div>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
