@@ -1,6 +1,11 @@
 import { QRCodeSVG } from "qrcode.react";
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
+import { CardData } from "@/types";
+
+interface CryptoCardProps extends CardData {
+  variant: "front" | "back";
+}
 
 // Pure function to generate mnemonic spaces
 const generateMnemonicSpaces = (length: 12 | 24) =>
@@ -12,35 +17,14 @@ const formatAddress = (address: string) => ({
   secondHalf: address.slice(Math.ceil(address.length / 2)),
 });
 
-interface CryptoCardProps {
-  name: string;
-  code: string;
-  address: string;
-  color: string;
-  isVertical?: boolean;
-  showBack?: boolean;
-  mnemonicLength?: 12 | 24;
-  logoUrl?: string;
-  backgroundImage?: string;
-}
-
 export const CryptoCard = forwardRef<HTMLDivElement, CryptoCardProps>(
   (
-    {
-      name,
-      code,
-      address,
-      color,
-      isVertical = false,
-      showBack = false,
-      mnemonicLength = 24,
-      logoUrl,
-      backgroundImage,
-    },
+    { chain, address, orientation, mnemonicLength, backgroundImage, variant },
     ref,
   ) => {
-    const mnemonicSpaces = generateMnemonicSpaces(mnemonicLength);
+    const mnemonicSpaces = generateMnemonicSpaces(mnemonicLength ?? 24);
     const { firstHalf, secondHalf } = formatAddress(address);
+    const isVertical = orientation === "vertical";
 
     const renderFront = () => (
       <>
@@ -52,7 +36,7 @@ export const CryptoCard = forwardRef<HTMLDivElement, CryptoCardProps>(
         ) : (
           <div
             className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_120%,_var(--color),_transparent_70%)]"
-            style={{ "--color": color } as { "--color": string }}
+            style={{ "--color": chain.color } as { "--color": string }}
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent" />
@@ -70,15 +54,19 @@ export const CryptoCard = forwardRef<HTMLDivElement, CryptoCardProps>(
         >
           <div className="flex flex-col relative z-20">
             <div className="flex items-center gap-3 mb-2">
-              {logoUrl && (
-                <img src={logoUrl} alt={`${name} logo`} className="w-6 h-6" />
+              {chain.logo && (
+                <img
+                  src={chain.logo}
+                  alt={`${chain.name} logo`}
+                  className="w-6 h-6"
+                />
               )}
               <h2 className="text-white font-bold text-2xl tracking-tight">
-                {name}
+                {chain.name}
               </h2>
             </div>
             <p className="text-gray-400 text-sm font-mono tracking-wider pl-9">
-              {code}
+              {chain.symbol}
             </p>
           </div>
 
@@ -188,7 +176,7 @@ export const CryptoCard = forwardRef<HTMLDivElement, CryptoCardProps>(
           isVertical ? "w-[53.98mm] h-[85.60mm]" : "w-[85.60mm] h-[53.98mm]",
         )}
       >
-        {!showBack ? renderFront() : renderBack()}
+        {variant === "front" ? renderFront() : renderBack()}
       </div>
     );
   },

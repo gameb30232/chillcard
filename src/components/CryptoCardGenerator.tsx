@@ -16,13 +16,14 @@ import { useToast } from "@/components/ui/use-toast";
 import { useReactToPrint } from "react-to-print";
 
 import { CRYPTOCURRENCIES } from "@/data/chains";
+import { CardData } from "@/types";
 
 export const CryptoCardGenerator = () => {
-  const [selectedCrypto, setSelectedCrypto] = useState<
-    (typeof CRYPTOCURRENCIES)[number]
-  >(CRYPTOCURRENCIES[0]);
+  const [selectedChain, setSelectedChain] = useState(CRYPTOCURRENCIES[0]);
   const [address, setAddress] = useState("");
-  const [isVertical, setIsVertical] = useState(false);
+  const [orientation, setOrientation] = useState<"horizontal" | "vertical">(
+    "horizontal",
+  );
   const [mnemonicLength, setMnemonicLength] = useState<12 | 24>(24);
   const [backgroundImage, setBackgroundImage] = useState<string>("");
   const { toast } = useToast();
@@ -48,6 +49,14 @@ export const CryptoCardGenerator = () => {
     const reader = new FileReader();
     reader.onload = (e) => setBackgroundImage(e.target?.result as string);
     reader.readAsDataURL(file);
+  };
+
+  const cardData: CardData = {
+    chain: selectedChain,
+    address: address || "Enter your wallet address",
+    orientation,
+    backgroundImage,
+    mnemonicLength,
   };
 
   return (
@@ -87,19 +96,21 @@ export const CryptoCardGenerator = () => {
                 Cryptocurrency
               </Label>
               <Select
-                value={selectedCrypto.code}
+                value={selectedChain.symbol}
                 onValueChange={(value) => {
-                  const crypto = CRYPTOCURRENCIES.find((c) => c.code === value);
-                  if (crypto) setSelectedCrypto(crypto);
+                  const chain = CRYPTOCURRENCIES.find(
+                    (c) => c.symbol === value,
+                  );
+                  if (chain) setSelectedChain(chain);
                 }}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a cryptocurrency" />
                 </SelectTrigger>
                 <SelectContent>
-                  {CRYPTOCURRENCIES.map((crypto) => (
-                    <SelectItem key={crypto.code} value={crypto.code}>
-                      {crypto.name} ({crypto.code})
+                  {CRYPTOCURRENCIES.map((chain) => (
+                    <SelectItem key={chain.symbol} value={chain.symbol}>
+                      {chain.name} ({chain.symbol})
                     </SelectItem>
                   ))}
                 </SelectContent>
@@ -154,8 +165,10 @@ export const CryptoCardGenerator = () => {
               </Label>
               <Switch
                 id="vertical-mode"
-                checked={isVertical}
-                onCheckedChange={setIsVertical}
+                checked={orientation === "vertical"}
+                onCheckedChange={(checked) =>
+                  setOrientation(checked ? "vertical" : "horizontal")
+                }
               />
             </div>
           </div>
@@ -165,29 +178,8 @@ export const CryptoCardGenerator = () => {
           ref={cardsRef}
           className="flex justify-center gap-8 p-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-inner"
         >
-          <CryptoCard
-            name={selectedCrypto.name}
-            code={selectedCrypto.code}
-            address={address || "Enter your wallet address"}
-            color={selectedCrypto.color}
-            isVertical={isVertical}
-            showBack={false}
-            mnemonicLength={mnemonicLength}
-            logoUrl={selectedCrypto.logo}
-            backgroundImage={backgroundImage}
-          />
-
-          <CryptoCard
-            name={selectedCrypto.name}
-            code={selectedCrypto.code}
-            address={address || "Enter your wallet address"}
-            color={selectedCrypto.color}
-            isVertical={isVertical}
-            showBack={true}
-            mnemonicLength={mnemonicLength}
-            logoUrl={selectedCrypto.logo}
-            backgroundImage={backgroundImage}
-          />
+          <CryptoCard {...cardData} variant="front" />
+          <CryptoCard {...cardData} variant="back" />
         </div>
       </div>
     </div>
