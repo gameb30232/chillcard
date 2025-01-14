@@ -1,9 +1,9 @@
-import { CryptoCardGenerator } from "@/components/CryptoCardGenerator";
+import { Generator } from "@/components/Generator";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      <CryptoCardGenerator />
+      <Generator />
     </div>
   );
 };

@@ -18,7 +18,7 @@ import { useReactToPrint } from "react-to-print";
 import { CRYPTOCURRENCIES } from "@/data/chains";
 import { CardData } from "@/types";
 
-export const CryptoCardGenerator = () => {
+export const Generator = () => {
   const [selectedChain, setSelectedChain] = useState(CRYPTOCURRENCIES[0]);
   const [address, setAddress] = useState("");
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">(
