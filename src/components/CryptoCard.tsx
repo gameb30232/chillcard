@@ -1,6 +1,6 @@
 import { QRCodeSVG } from "qrcode.react";
 import { cn } from "@/lib/utils";
-import { forwardRef } from "react";
+import { forwardRef, CSSProperties } from "react";
 import { CardData } from "@/types";
 
 interface CryptoCardProps extends CardData {
@@ -36,7 +36,7 @@ export const CryptoCard = forwardRef<HTMLDivElement, CryptoCardProps>(
         ) : (
           <div
             className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_120%,_var(--color),_transparent_70%)]"
-            style={{ "--color": chain.color } as { "--color": string }}
+            style={{ "--color": chain.color } as CSSProperties}
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent" />
