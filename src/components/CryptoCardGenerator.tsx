@@ -60,16 +60,16 @@ export const CryptoCardGenerator = () => {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <div className="container mx-auto py-4 px-4 md:py-8">
+      <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
         <div className="controls space-y-4">
           <div className="space-y-2">
-            <div className="flex justify-between items-center">
-              <h1 className="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+              <h1 className="text-2xl md:text-4xl font-bold text-center md:text-left bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                 Crypto Backup Card Generator
               </h1>
-              <div className="flex items-center gap-4">
-                <div className="text-sm text-muted-foreground">
+              <div className="flex flex-col md:flex-row items-center gap-4">
+                <div className="text-sm text-muted-foreground hidden md:block">
                   <p className="flex items-center gap-2">
                     <span>💡</span>
                     <span>
@@ -81,7 +81,7 @@ export const CryptoCardGenerator = () => {
                 <Button
                   onClick={() => handlePrint()}
                   variant="outline"
-                  className="gap-2"
+                  className="gap-2 w-full md:w-auto"
                 >
                   <Printer className="h-4 w-4" />
                   Print Cards
@@ -90,7 +90,7 @@ export const CryptoCardGenerator = () => {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="crypto" className="text-sm font-medium">
                 Cryptocurrency
@@ -145,8 +145,8 @@ export const CryptoCardGenerator = () => {
             </div>
           </div>
 
-          <div className="flex items-center space-x-6 justify-end">
-            <div className="flex items-center space-x-2">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 md:justify-end">
+            <div className="flex items-center justify-between md:gap-2">
               <Label htmlFor="mnemonic-length" className="text-sm font-medium">
                 24-word Phrase
               </Label>
@@ -159,7 +159,7 @@ export const CryptoCardGenerator = () => {
               />
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center justify-between md:gap-2">
               <Label htmlFor="vertical-mode" className="text-sm font-medium">
                 Vertical Card
               </Label>
@@ -176,7 +176,7 @@ export const CryptoCardGenerator = () => {
 
         <div
           ref={cardsRef}
-          className="flex justify-center gap-8 p-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-inner"
+          className="flex flex-col md:flex-row justify-center gap-8 p-4 md:p-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-inner"
         >
           <CryptoCard {...cardData} variant="front" />
           <CryptoCard {...cardData} variant="back" />
