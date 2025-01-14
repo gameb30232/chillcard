@@ -30,7 +30,7 @@ export const CryptoCardGenerator = () => {
   const cardsRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
-    content: () => cardsRef.current,
+    contentRef: cardsRef,
   });
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
