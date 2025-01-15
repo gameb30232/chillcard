@@ -17,6 +17,7 @@ import { useReactToPrint } from "react-to-print";
 
 import { CRYPTOCURRENCIES } from "@/data/chains";
 import { CardData } from "@/types";
+import { BRANDING, UI } from "@/constants";
 
 export const Generator = () => {
   const [selectedChain, setSelectedChain] = useState(CRYPTOCURRENCIES[0]);
@@ -53,7 +54,7 @@ export const Generator = () => {
 
   const cardData: CardData = {
     chain: selectedChain,
-    address: address || "Enter your wallet address",
+    address: address || UI.FORM.WALLET_ADDRESS.DEFAULT_TEXT,
     orientation,
     backgroundImage,
     mnemonicLength,
@@ -66,16 +67,13 @@ export const Generator = () => {
           <div className="space-y-2">
             <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
               <h1 className="text-2xl md:text-4xl font-bold text-center md:text-left bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-                Crypto Backup Card Generator
+                {BRANDING.APP_NAME}
               </h1>
               <div className="flex flex-col md:flex-row items-center gap-4">
                 <div className="text-sm text-muted-foreground hidden md:block">
                   <p className="flex items-center gap-2">
                     <span>💡</span>
-                    <span>
-                      Enable "Background graphics" in print settings for best
-                      results
-                    </span>
+                    <span>{BRANDING.PRINT_INSTRUCTIONS}</span>
                   </p>
                 </div>
                 <Button
@@ -84,7 +82,7 @@ export const Generator = () => {
                   className="gap-2 w-full md:w-auto"
                 >
                   <Printer className="h-4 w-4" />
-                  Print Cards
+                  {UI.BUTTONS.PRINT}
                 </Button>
               </div>
             </div>
@@ -93,7 +91,7 @@ export const Generator = () => {
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="crypto" className="text-sm font-medium">
-                Cryptocurrency
+                {UI.FORM.CRYPTO_CURRENCY.LABEL}
               </Label>
               <Select
                 value={selectedChain.symbol}
@@ -105,7 +103,9 @@ export const Generator = () => {
                 }}
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a cryptocurrency" />
+                  <SelectValue
+                    placeholder={UI.FORM.CRYPTO_CURRENCY.PLACEHOLDER}
+                  />
                 </SelectTrigger>
                 <SelectContent>
                   {CRYPTOCURRENCIES.map((chain) => (
@@ -119,11 +119,11 @@ export const Generator = () => {
 
             <div className="space-y-2">
               <Label htmlFor="address" className="text-sm font-medium">
-                Wallet Address
+                {UI.FORM.WALLET_ADDRESS.LABEL}
               </Label>
               <Input
                 id="address"
-                placeholder="Enter wallet address"
+                placeholder={UI.FORM.WALLET_ADDRESS.PLACEHOLDER}
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 className="font-mono"
@@ -132,7 +132,7 @@ export const Generator = () => {
 
             <div className="space-y-2">
               <Label htmlFor="background" className="text-sm font-medium">
-                Background Image
+                {UI.FORM.BACKGROUND_IMAGE.LABEL}
               </Label>
               <Input
                 id="background"
@@ -141,14 +141,16 @@ export const Generator = () => {
                 onChange={handleImageUpload}
                 className="cursor-pointer"
               />
-              <p className="text-xs text-gray-500">Max size: 5MB</p>
+              <p className="text-xs text-gray-500">
+                {UI.FORM.BACKGROUND_IMAGE.MAX_SIZE_TEXT}
+              </p>
             </div>
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 md:justify-end">
             <div className="flex items-center justify-between md:gap-2">
               <Label htmlFor="mnemonic-length" className="text-sm font-medium">
-                24-word Phrase
+                {UI.FORM.TOGGLES.TWENTY_FOUR_WORD}
               </Label>
               <Switch
                 id="mnemonic-length"
@@ -161,7 +163,7 @@ export const Generator = () => {
 
             <div className="flex items-center justify-between md:gap-2">
               <Label htmlFor="vertical-mode" className="text-sm font-medium">
-                Vertical Card
+                {UI.FORM.TOGGLES.VERTICAL_CARD}
               </Label>
               <Switch
                 id="vertical-mode"

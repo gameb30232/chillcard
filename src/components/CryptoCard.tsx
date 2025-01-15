@@ -2,6 +2,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { cn } from "@/lib/utils";
 import { forwardRef, CSSProperties } from "react";
 import { CardData } from "@/types";
+import { UI, CARD_CONFIG } from "@/constants";
 
 interface CryptoCardProps extends CardData {
   variant: "front" | "back";
@@ -120,7 +121,7 @@ export const CryptoCard = forwardRef<HTMLDivElement, CryptoCardProps>(
         <div className="relative z-10 h-full flex flex-col">
           <div className="flex items-center justify-between mb-1 px-1">
             <h3 className="text-white/90 text-[11px] font-medium">
-              Recovery Phrase
+              {UI.CARD.RECOVERY_PHRASE.TITLE}
             </h3>
             <span className="text-gray-400 text-[9px]">
               {mnemonicLength} words
@@ -156,7 +157,7 @@ export const CryptoCard = forwardRef<HTMLDivElement, CryptoCardProps>(
 
           <div className="mt-1 text-center">
             <p className="text-gray-400 text-[7px]">
-              Write your recovery phrase here and keep it safe
+              {UI.CARD.RECOVERY_PHRASE.DEFAULT_MESSAGE}
             </p>
           </div>
         </div>
