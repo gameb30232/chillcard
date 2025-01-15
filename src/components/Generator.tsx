@@ -19,7 +19,7 @@ import { useReactToPrint } from "react-to-print";
 
 import { CRYPTOCURRENCIES } from "@/data/chains";
 import { CardData } from "@/types";
-import { BRANDING, UI } from "@/constants";
+import { BRANDING, UI, CARD_DIMENSIONS } from "@/constants";
 import { cn } from "@/lib/utils";
 
 export const Generator = () => {

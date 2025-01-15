@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { CARD_CONFIG, CARD_DIMENSIONS } from "@/constants";
 
 // Pure function to generate mnemonic spaces
 export const generateMnemonicSpaces = (length: 12 | 24) =>
@@ -11,16 +12,28 @@ export const formatAddress = (address: string) => ({
 });
 
 // Card styling
-export const baseCardStyles = cn(
-  "rounded-xl p-6 relative overflow-hidden transition-all duration-300",
-  "bg-gradient-to-br from-gray-900 to-gray-800",
-  "shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(0,0,0,0.3)]",
-  "backdrop-blur-xl backdrop-saturate-150",
-  "hover:scale-105"
-);
+export const cardStyles = {
+  base: cn(
+    "crypto-card",
+    "rounded-xl p-6 relative overflow-hidden transition-all duration-300",
+    "bg-gradient-to-br from-gray-900 to-gray-800",
+    "shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(0,0,0,0.3)]",
+    "backdrop-blur-xl backdrop-saturate-150",
+    "hover:scale-105"
+  ),
+  decorations: {
+    topGradient: "absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full -translate-y-16 translate-x-16",
+    bottomGradient: "absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-full translate-y-12 -translate-x-12",
+    overlay: "absolute inset-0 bg-gradient-to-br from-black/10 to-transparent"
+  },
+  qrContainer: "bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-[0_0_15px_rgba(0,0,0,0.1)] transition-transform duration-300 group-hover:scale-[1.02]"
+};
 
-// Orientation-specific sizing
-export const getCardSizeClass = (orientation: "horizontal" | "vertical") =>
+// Get card dimensions based on orientation
+export const getCardDimensions = (orientation: "horizontal" | "vertical") =>
   orientation === "vertical"
-    ? "w-[53.98mm] h-[85.60mm]"
-    : "w-[85.60mm] h-[53.98mm]";
+    ? CARD_DIMENSIONS.CREDIT_CARD.VERTICAL
+    : CARD_DIMENSIONS.CREDIT_CARD.HORIZONTAL;
+
+export const getQRCodeSize = (isVertical: boolean) =>
+  isVertical ? CARD_CONFIG.QR.VERTICAL_SIZE : CARD_CONFIG.QR.HORIZONTAL_SIZE;

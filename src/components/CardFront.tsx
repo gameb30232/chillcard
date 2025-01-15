@@ -3,18 +3,9 @@ import { cn } from "@/lib/utils";
 import { CSSProperties } from "react";
 import { CARD_CONFIG, CLASSES } from "@/constants";
 import { formatAddress } from "@/utils/card";
-
-interface CardFrontProps {
-  chain: {
-    name: string;
-    symbol: string;
-    logo?: string;
-    color: string;
-  };
-  address: string;
-  orientation: "horizontal" | "vertical";
-  backgroundImage?: string;
-}
+import { Background } from "./card/Background";
+import { QRCode } from "./card/QRCode";
+import type { CardFrontProps } from "@/types/card";
 
 export const CardFront = ({
   chain,
@@ -27,21 +18,7 @@ export const CardFront = ({
 
   return (
     <>
-      {backgroundImage ? (
-        <div
-          className="absolute inset-0 opacity-20 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        />
-      ) : (
-        <div
-          className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_120%,_var(--color),_transparent_70%)]"
-          style={{ "--color": chain.color } as CSSProperties}
-        />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent" />
-
-      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full -translate-y-16 translate-x-16" />
-      <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-white/5 to-transparent rounded-full translate-y-12 -translate-x-12" />
+      <Background backgroundImage={backgroundImage} color={chain.color} />
 
       <div
         className={cn(
@@ -88,29 +65,7 @@ export const CardFront = ({
             </div>
           </div>
 
-          <div
-            className="bg-white/90 backdrop-blur-sm rounded-lg p-2
-                     shadow-[0_0_15px_rgba(0,0,0,0.1)]
-                     transition-transform duration-300
-                     group-hover:scale-[1.02]"
-          >
-            <div
-              className={cn(
-                "flex items-center justify-center",
-                isVertical ? "w-[86px] h-[86px]" : "w-[76px] h-[76px]",
-              )}
-            >
-              <QRCodeSVG
-                value={address}
-                size={
-                  isVertical
-                    ? CARD_CONFIG.QR.VERTICAL_SIZE
-                    : CARD_CONFIG.QR.HORIZONTAL_SIZE
-                }
-                level={CARD_CONFIG.QR.LEVEL}
-              />
-            </div>
-          </div>
+          <QRCode address={address} isVertical={isVertical} />
         </div>
       </div>
     </>

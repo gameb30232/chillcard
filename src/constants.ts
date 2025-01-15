@@ -44,8 +44,18 @@ export const IMAGE = {
 
 // Card dimensions (in mm)
 export const CARD_DIMENSIONS = {
-  VERTICAL: { WIDTH: 53.98, HEIGHT: 85.60 },
-  HORIZONTAL: { WIDTH: 85.60, HEIGHT: 53.98 }
+  // ID-1 format (ISO/IEC 7810:2003)
+  // Standard credit card size: 85.60 × 53.98 millimeters
+  CREDIT_CARD: {
+    VERTICAL: {
+      WIDTH: '53.98mm',
+      HEIGHT: '85.60mm'
+    },
+    HORIZONTAL: {
+      WIDTH: '85.60mm',
+      HEIGHT: '53.98mm'
+    }
+  }
 } as const;
 
 // Card elements configuration
