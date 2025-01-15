@@ -4,19 +4,23 @@ Follow these steps to run the application locally:
 
 ### Prerequisites
 
-* **Node.js:**  While Bun is the primary package manager, having Node.js installed is generally a good prerequisite for web development. You can download it from [nodejs.org](https://nodejs.org/).
-* **Bun:**  A fast JavaScript runtime and package manager. Ensure you have Bun installed on your system. You can find installation instructions on the [Bun website](https://bun.sh/).
+* **Nix:**  ChillCard uses Nix for reproducible development environments. Install it from [nixos.org](https://nixos.org/download.html).
+* **Bun:**  A fast JavaScript runtime and package manager. Install from [bun.sh](https://bun.sh/).
 
 ### Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone git@github.com:gameb30232/papercard.git
-   cd papercard
+   git clone git@github.com:gameb30232/chillcard.git
+   cd chillcard
    ```
 
-2. **Install dependencies:**
-   Using Bun:
+2. **Enter the development environment:**
+   ```bash
+   nix develop
+   ```
+
+3. **Install dependencies:**
    ```bash
    bun install
    ```
@@ -24,44 +28,61 @@ Follow these steps to run the application locally:
 ### Running the Application
 
 1. **Start the development server:**
-   Using Bun:
    ```bash
    bun run dev
    ```
 
-2. **Open in your browser:**  The application should automatically open in your default web browser. If not, navigate to the address displayed in your terminal (likely `http://localhost:8080/`).
+2. **Open in your browser:**  Navigate to `http://localhost:8080/`
 
 ## Available Scripts
 
 The following scripts are available in the `package.json` file:
 
-* **`dev`:** Starts the development server using Vite. Run with `bun run dev`.
-* **[Add other scripts from your `package.json` here, e.g., `build`: Builds the application for production. Run with `bun run build`. ]**
+* **`dev`:** Starts the development server using Vite
+* **`build`:** Builds the application for production
+* **`build:dev`:** Builds the application in development mode
+* **`lint`:** Runs ESLint for code quality
+* **`preview`:** Previews the production build locally
 
 ## Usage
 
-1. **Pick a Crypto:** Choose the cryptocurrency you're backing up.
-2. **Enter Your Address:**  Type or paste your crypto wallet address.
-3. **Optional Background:**  Add a background image if you like.
-4. **Recovery Phrase Length:** Choose whether your recovery phrase is 12 or 24 words.
-5. **Card Layout:**  Pick a vertical or horizontal card.
-6. **Print It:** Click the "Print Cards" button to print your backup.
+1. **Pick a Crypto:** Choose your cryptocurrency from the available options
+2. **Enter Your Address:** Input your wallet address
+3. **Optional Background:** Add a custom background image (max 5MB)
+4. **Recovery Phrase Length:** Toggle between 12 or 24 words
+5. **Card Layout:** Choose vertical or horizontal orientation
+6. **Print:** Click the print button to generate your backup cards
 
 ### Printing Recommendations
 
-* **Enable Background Graphics:** For the best visual results, ensure that "Background graphics" or a similar option is enabled in your browser's print settings. This will ensure that the background color/image is printed.
-* **Card Stock (Optional):**  Printing on thicker card stock can improve the durability of your backup cards.
-* **Cut Carefully:** After printing, carefully cut out the generated cards along the edges.
+* **Enable Background Graphics:** For best results, enable "Background graphics" in your print settings
+* **Card Stock (Optional):** Consider using thicker paper for durability
+* **Cut Carefully:** Cut along the edges after printing
 
 ## Customization
 
-You can further customize the application by modifying the source code. Here are some potential areas for customization:
+You can customize the application by modifying:
 
-* **Adding More Cryptocurrencies:**  You can add more cryptocurrencies to the `CRYPTOCURRENCIES` array in `src/components/CryptoCardGenerator.tsx`. Include the `name`, `code`, `color`, and `logo` URL for each new cryptocurrency.
-* **Styling:**  Modify the Tailwind CSS classes in the components to adjust the appearance of the cards and the overall application.
-* **Adding More Features:**  Consider adding features like exporting the card as an image, generating multiple cards at once, or adding a field for a custom network name.
+* **Cryptocurrencies:** Add or modify cryptocurrencies in `src/data/chains.ts`
+* **Card Styling:** Adjust styles in:
+  * `src/components/card/*.tsx` for component-specific styles
+  * `src/utils/card.ts` for shared card styles
+  * `src/constants/layout.ts` for layout measurements
+* **Theme:** Modify the Tailwind configuration in `tailwind.config.ts`
 
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── card/         # Card-related components
+│   └── ui/           # Shared UI components
+├── constants/        # Application constants
+├── data/            # Data definitions
+├── types/           # TypeScript types
+└── utils/           # Utility functions
+```
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE) - see the `LICENSE` file for details.
+This project is licensed under the [MIT License](LICENSE).
