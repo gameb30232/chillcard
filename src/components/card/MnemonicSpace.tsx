@@ -1,6 +1,4 @@
-interface MnemonicSpaceProps {
-  number: number;
-}
+import type { MnemonicSpaceProps } from "@/types/card";
 
 export const MnemonicSpace = ({ number }: MnemonicSpaceProps) => (
   <div className="relative">

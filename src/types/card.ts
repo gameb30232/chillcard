@@ -8,33 +8,37 @@ export interface Chain {
 export interface CardData {
   chain: Chain;
   address: string;
-  orientation: "horizontal" | "vertical";
+  orientation: Orientation;
   backgroundImage?: string;
   mnemonicLength: 12 | 24;
 }
 
 export type CardFrontProps = Omit<CardData, 'mnemonicLength'>
 
-export type CardBackProps = Pick<CardData, 'mnemonicLength' | 'orientation'>
+export type MnemonicLength = CardData['mnemonicLength'] // This gets the type '12 | 24'
 
-export interface BackgroundProps {
-  backgroundImage?: string;
-  color?: string;
+export type MnemonicSpaceProps = {
+  number: number
 }
 
-export interface QRCodeProps {
-  address: string;
+export type CardBackProps = Pick<CardData, 'mnemonicLength' | 'orientation'>
+
+export type BackgroundProps = {
+  backgroundImage?: CardData['backgroundImage']
+  color: Chain['color']  // Making it required since it comes from Chain
+}
+
+export type QRCodeProps = Pick<CardData, 'address'> & {
   isVertical: boolean;
 }
 
-export interface MnemonicGridProps {
-  mnemonicLength: 12 | 24;
+export type MnemonicGridProps = Pick<CardData, 'mnemonicLength'> & {
   isVertical: boolean;
 }
 
 export interface CardProps {
   children: React.ReactNode;
-  orientation: "horizontal" | "vertical";
+  orientation: Orientation;
 }
 
 export type Orientation = "horizontal" | "vertical";
