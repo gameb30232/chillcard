@@ -19,7 +19,10 @@ export const cardStyles = {
     "bg-gradient-to-br from-gray-900 to-gray-800",
     "shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(0,0,0,0.3)]",
     "backdrop-blur-xl backdrop-saturate-150",
-    "hover:scale-105"
+    "hover:shadow-xl transition-shadow",
+    "hover:brightness-110 transition-all",  // Slight brightness increase
+    "hover:-translate-y-1 transition-transform",  // Slight upward movement
+    //"hover:scale-105"
   ),
   decorations: {
     topGradient: "absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/5 to-transparent rounded-full -translate-y-16 translate-x-16",

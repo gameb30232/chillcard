@@ -19,7 +19,7 @@ export const CardContainer = ({
         "crypto-card",
         cardStyles.base,
         "shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(0,0,0,0.3)]",
-        "hover:scale-105",
+        //"hover:scale-105",
       )}
       style={
         {
