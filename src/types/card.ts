@@ -13,17 +13,7 @@ export interface CardData {
   mnemonicLength: 12 | 24;
 }
 
-export interface CardFrontProps {
-  chain: {
-    name: string;
-    symbol: string;
-    logo?: string;
-    color: string;
-  };
-  address: string;
-  orientation: "horizontal" | "vertical";
-  backgroundImage?: string;
-}
+export type CardFrontProps = Omit<CardData, 'mnemonicLength'>
 
 export interface CardBackProps {
   mnemonicLength: 12 | 24;
@@ -51,5 +41,3 @@ export interface CardProps {
 }
 
 export type Orientation = "horizontal" | "vertical";
-
-export type MnemonicLength = 12 | 24;
