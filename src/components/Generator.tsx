@@ -1,5 +1,7 @@
 import { useState, useRef, type MouseEvent } from "react";
-import { CryptoCard } from "./CryptoCard";
+import { CardFront } from "./CardFront";
+import { CardBack } from "./CardBack";
+import { CardContainer } from "./CardContainer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -183,8 +185,15 @@ export const Generator = () => {
               : "flex-col items-center",
           )}
         >
-          <CryptoCard {...cardData} variant="front" />
-          <CryptoCard {...cardData} variant="back" />
+          <CardContainer orientation={orientation}>
+            <CardFront {...cardData} />
+          </CardContainer>
+          <CardContainer orientation={orientation}>
+            <CardBack
+              mnemonicLength={mnemonicLength}
+              orientation={orientation}
+            />
+          </CardContainer>
         </div>
       </div>
     </div>

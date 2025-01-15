@@ -113,6 +113,8 @@
 
   .crypto-card {
     break-inside: avoid;
+    width: var(--card-width) !important;
+    height: var(--card-height) !important;
   }
 
   .no-print-bg {
