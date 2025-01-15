@@ -1,7 +1,7 @@
 import { useState, useRef, type MouseEvent } from "react";
 import { CardFront } from "@/components/card/CardFront";
 import { CardBack } from "@/components/card/CardBack";
-import { CardContainer } from "@/components/CardContainer";
+import { CardContainer } from "@/components/card/CardContainer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useReactToPrint } from "react-to-print";
 
 import { CRYPTOCURRENCIES } from "@/data/chains";
-import { CardData } from "@/types";
+import { CardData } from "@/types/card";
 import { BRANDING, UI, CARD_DIMENSIONS } from "@/constants";
 import { cn } from "@/lib/utils";
 
