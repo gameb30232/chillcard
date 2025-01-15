@@ -18,6 +18,7 @@ import { useReactToPrint } from "react-to-print";
 import { CRYPTOCURRENCIES } from "@/data/chains";
 import { CardData } from "@/types";
 import { BRANDING, UI } from "@/constants";
+import { cn } from "@/lib/utils";
 
 export const Generator = () => {
   const [selectedChain, setSelectedChain] = useState(CRYPTOCURRENCIES[0]);
@@ -174,7 +175,13 @@ export const Generator = () => {
 
         <div
           ref={cardsRef}
-          className="flex flex-col gap-8 p-6 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl shadow-inner"
+          data-orientation={orientation}
+          className={cn(
+            "flex gap-8 no-print-bg cards-container",
+            orientation === "vertical"
+              ? "flex-row justify-center"
+              : "flex-col items-center",
+          )}
         >
           <CryptoCard {...cardData} variant="front" />
           <CryptoCard {...cardData} variant="back" />

@@ -101,11 +101,38 @@
 }
 
 @media print {
+  @page {
+    margin: 20mm 20mm 20mm 20mm;
+    /* top right bottom left */
+    size: auto;
+  }
+
   .controls {
     display: none !important;
   }
 
   .crypto-card {
     break-inside: avoid;
+  }
+
+  .no-print-bg {
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .cards-container {
+    gap: 20mm !important;
+  }
+
+  /* Preserve the orientation-specific layout */
+  .cards-container[data-orientation="vertical"] {
+    flex-direction: row !important;
+    justify-content: center !important;
+  }
+
+  .cards-container[data-orientation="horizontal"] {
+    flex-direction: column !important;
+    align-items: center !important;
   }
 }
