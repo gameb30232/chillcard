@@ -15,10 +15,7 @@ export interface CardData {
 
 export type CardFrontProps = Omit<CardData, 'mnemonicLength'>
 
-export interface CardBackProps {
-  mnemonicLength: 12 | 24;
-  orientation: "horizontal" | "vertical";
-}
+export type CardBackProps = Pick<CardData, 'mnemonicLength' | 'orientation'>
 
 export interface BackgroundProps {
   backgroundImage?: string;
