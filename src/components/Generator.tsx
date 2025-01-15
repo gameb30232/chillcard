@@ -1,7 +1,7 @@
 import { useState, useRef, type MouseEvent } from "react";
-import { CardFront } from "./CardFront";
-import { CardBack } from "./CardBack";
-import { CardContainer } from "./CardContainer";
+import { CardFront } from "@/components/card/CardFront";
+import { CardBack } from "@/components/card/CardBack";
+import { CardContainer } from "@/components/CardContainer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";

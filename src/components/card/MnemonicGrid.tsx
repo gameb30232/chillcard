@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { CARD_CONFIG } from "@/constants";
 import { generateMnemonicSpaces } from "@/utils/card";
 import type { MnemonicGridProps } from "@/types/card";
-import { MnemonicSpace } from "./MnemonicSpace";
+import { MnemonicSpace } from "@/components/card/MnemonicSpace";
 
 export const MnemonicGrid = ({
   mnemonicLength,

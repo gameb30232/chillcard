@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { UI } from "@/constants";
-import { MnemonicGrid } from "./card/MnemonicGrid";
+import { MnemonicGrid } from "@/components/card/MnemonicGrid";
 import type { CardBackProps } from "@/types/card";
 
 export const CardBack = ({ mnemonicLength, orientation }: CardBackProps) => {

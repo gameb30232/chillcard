@@ -3,8 +3,8 @@ import { cn } from "@/lib/utils";
 import { CSSProperties } from "react";
 import { CARD_CONFIG, CLASSES } from "@/constants";
 import { formatAddress } from "@/utils/card";
-import { Background } from "./card/Background";
-import { QRCode } from "./card/QRCode";
+import { Background } from "@/components/card/Background";
+import { QRCode } from "@/components/card/QRCode";
 import type { CardFrontProps } from "@/types/card";
 
 export const CardFront = ({
