@@ -21,7 +21,7 @@ export const cardStyles = {
     "backdrop-blur-xl backdrop-saturate-150",
     "hover:shadow-xl transition-shadow",
     "hover:brightness-110 transition-all",  // Slight brightness increase
-    "hover:-translate-y-1 transition-transform",  // Slight upward movement
+    "hover:translate-y-2 transition-transform",  // Slight upward movement
     //"hover:scale-105"
   ),
   decorations: {
