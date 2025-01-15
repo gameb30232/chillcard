@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, type MouseEvent } from "react";
 import { CryptoCard } from "./CryptoCard";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -34,6 +34,11 @@ export const Generator = () => {
     contentRef: cardsRef,
   });
 
+  const onPrintClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    handlePrint();
+  };
+
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -61,38 +66,19 @@ export const Generator = () => {
   };
 
   return (
-    <div className="container mx-auto py-4 px-4 md:py-8">
-      <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
-        <div className="controls space-y-4">
-          <div className="space-y-2">
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-              <h1 className="text-2xl md:text-4xl font-bold text-center md:text-left bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-                {BRANDING.APP_NAME}
-              </h1>
-              <div className="flex flex-col md:flex-row items-center gap-4">
-                <div className="text-sm text-muted-foreground hidden md:block">
-                  <p className="flex items-center gap-2">
-                    <span>💡</span>
-                    <span>{BRANDING.PRINT_INSTRUCTIONS}</span>
-                  </p>
-                </div>
-                <Button
-                  onClick={() => handlePrint()}
-                  variant="outline"
-                  className="gap-2 w-full md:w-auto"
-                >
-                  <Printer className="h-4 w-4" />
-                  {UI.BUTTONS.PRINT}
-                </Button>
-              </div>
-            </div>
-          </div>
+    <div className="space-y-8">
+      <header className="text-center space-y-2">
+        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+          {BRANDING.APP_NAME}
+        </h1>
+        <p className="text-slate-600">{BRANDING.TAGLINE}</p>
+      </header>
 
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
+      <div className="grid md:grid-cols-[1fr,auto] gap-8">
+        <div className="bg-white rounded-2xl p-6 shadow-sm space-y-6">
+          <div className="grid gap-4">
             <div className="space-y-2">
-              <Label htmlFor="crypto" className="text-sm font-medium">
-                {UI.FORM.CRYPTO_CURRENCY.LABEL}
-              </Label>
+              <Label htmlFor="crypto">{UI.FORM.CRYPTO_CURRENCY.LABEL}</Label>
               <Select
                 value={selectedChain.symbol}
                 onValueChange={(value) => {
@@ -118,9 +104,7 @@ export const Generator = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="address" className="text-sm font-medium">
-                {UI.FORM.WALLET_ADDRESS.LABEL}
-              </Label>
+              <Label htmlFor="address">{UI.FORM.WALLET_ADDRESS.LABEL}</Label>
               <Input
                 id="address"
                 placeholder={UI.FORM.WALLET_ADDRESS.PLACEHOLDER}
@@ -131,7 +115,7 @@ export const Generator = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="background" className="text-sm font-medium">
+              <Label htmlFor="background">
                 {UI.FORM.BACKGROUND_IMAGE.LABEL}
               </Label>
               <Input
@@ -141,44 +125,56 @@ export const Generator = () => {
                 onChange={handleImageUpload}
                 className="cursor-pointer"
               />
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-slate-500">
                 {UI.FORM.BACKGROUND_IMAGE.MAX_SIZE_TEXT}
               </p>
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 md:justify-end">
-            <div className="flex items-center justify-between md:gap-2">
-              <Label htmlFor="mnemonic-length" className="text-sm font-medium">
-                {UI.FORM.TOGGLES.TWENTY_FOUR_WORD}
-              </Label>
-              <Switch
-                id="mnemonic-length"
-                checked={mnemonicLength === 24}
-                onCheckedChange={(checked) =>
-                  setMnemonicLength(checked ? 24 : 12)
-                }
-              />
+          <div className="flex items-center justify-between border-t pt-4">
+            <div className="flex items-center gap-8">
+              <div className="flex items-center gap-2">
+                <Switch
+                  id="mnemonic-length"
+                  checked={mnemonicLength === 24}
+                  onCheckedChange={(checked) =>
+                    setMnemonicLength(checked ? 24 : 12)
+                  }
+                />
+                <Label htmlFor="mnemonic-length">
+                  {UI.FORM.TOGGLES.TWENTY_FOUR_WORD}
+                </Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <Switch
+                  id="vertical-mode"
+                  checked={orientation === "vertical"}
+                  onCheckedChange={(checked) =>
+                    setOrientation(checked ? "vertical" : "horizontal")
+                  }
+                />
+                <Label htmlFor="vertical-mode">
+                  {UI.FORM.TOGGLES.VERTICAL_CARD}
+                </Label>
+              </div>
             </div>
+          </div>
 
-            <div className="flex items-center justify-between md:gap-2">
-              <Label htmlFor="vertical-mode" className="text-sm font-medium">
-                {UI.FORM.TOGGLES.VERTICAL_CARD}
-              </Label>
-              <Switch
-                id="vertical-mode"
-                checked={orientation === "vertical"}
-                onCheckedChange={(checked) =>
-                  setOrientation(checked ? "vertical" : "horizontal")
-                }
-              />
-            </div>
+          <div className="flex items-center justify-between border-t pt-4">
+            <p className="text-sm text-slate-600">
+              <span className="inline-block mr-2">💡</span>
+              {BRANDING.PRINT_INSTRUCTIONS}
+            </p>
+            <Button onClick={onPrintClick} className="gap-2">
+              <Printer className="h-4 w-4" />
+              {UI.BUTTONS.PRINT}
+            </Button>
           </div>
         </div>
 
         <div
           ref={cardsRef}
-          className="flex flex-col md:flex-row justify-center gap-8 p-4 md:p-12 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl shadow-inner"
+          className="flex flex-col gap-8 p-6 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl shadow-inner"
         >
           <CryptoCard {...cardData} variant="front" />
           <CryptoCard {...cardData} variant="back" />

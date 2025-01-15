@@ -18,12 +18,14 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
-      <div className="max-w-5xl mx-auto p-6">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-          </Routes>
-        </BrowserRouter>
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
+        <div className="max-w-4xl mx-auto p-6">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
       </div>
     </TooltipProvider>
   </QueryClientProvider>
