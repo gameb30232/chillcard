@@ -1,39 +1,21 @@
-.crypto-card {
-  break-inside: avoid;
-  width: var(--card-width);
-  height: var(--card-height);
-}
-
-.no-print-bg {
-  background: none;
-  box-shadow: none;
-  padding: 0;
-}
-
-.cards-container {
-  gap: 2rem;
-}
-
-.cards-container[data-orientation="vertical"] {
-  flex-direction: row;
-  justify-content: center;
-}
-
-.cards-container[data-orientation="horizontal"] {
-  flex-direction: column;
-  align-items: center;
-}
-
 @layer components {
-  .card-shadow {
-    @apply shadow-[0_0_15px_rgba(0, 0, 0, 0.2)] hover:shadow-[0_0_25px_rgba(0, 0, 0, 0.3)];
+  .crypto-card {
+    break-inside: avoid;
+    width: var(--card-width);
+    height: var(--card-height);
   }
 
-  .card-transition {
-    @apply transition-all duration-300;
+  .cards-container {
+    gap: 2rem;
   }
 
-  .card-hover {
-    @apply hover:shadow-xl hover:-translate-y-1 hover:brightness-105;
+  .cards-container[data-orientation="vertical"] {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .cards-container[data-orientation="horizontal"] {
+    flex-direction: column;
+    align-items: center;
   }
 }
