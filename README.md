@@ -63,24 +63,31 @@ The following scripts are available in the `package.json` file:
 
 You can customize the application by modifying:
 
-* **Cryptocurrencies:** Add or modify cryptocurrencies in `src/data/chains.ts`
+* **Cryptocurrencies:** Add or modify cryptocurrencies in `src/config/chains.ts`
 * **Card Styling:** Adjust styles in:
-  * `src/components/card/*.tsx` for component-specific styles
-  * `src/utils/card.ts` for shared card styles
-  * `src/constants/layout.ts` for layout measurements
+  * `src/features/card-generator/*.tsx` for components
+  * `src/features/card-generator/utils/card.ts` for utilities
+  * `src/config/layout.ts` for layout measurements
 * **Theme:** Modify the Tailwind configuration in `tailwind.config.ts`
 
 ## Project Structure
 
 ```
 src/
+├── app/                 # Core application files
 ├── components/
-│   ├── card/         # Card-related components
-│   └── ui/           # Shared UI components
-├── constants/        # Application constants
-├── data/            # Data definitions
-├── types/           # TypeScript types
-└── utils/           # Utility functions
+│   └── ui/             # shadcn UI components
+├── config/             # Application configuration
+│   ├── chains.ts       # Cryptocurrency configurations
+│   ├── constants.ts    # Global constants
+│   └── layout.ts       # Layout measurements
+├── features/           # Feature modules
+│   └── card-generator/ # Card generation feature
+├── hooks/              # Global hooks
+├── lib/                # Utilities
+├── styles/
+│   └── css/           # Stylesheets
+└── types/             # TypeScript types
 ```
 
 ## License
