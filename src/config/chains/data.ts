@@ -1,6 +1,5 @@
-import { Chain } from "@/types/card"; // Import the interface
+import { Chain } from "./types";
 
-// Cryptocurrency data as a constant
 export const CRYPTOCURRENCIES: Chain[] = [
   {
     name: "Bitcoin",

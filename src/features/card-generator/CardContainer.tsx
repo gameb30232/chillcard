@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
-import { theme } from "@/config/theme";
+import { MEASUREMENTS, THEME } from "@/config";
 
 interface CardContainerProps {
   children: ReactNode;
@@ -12,20 +12,20 @@ export const CardContainer = ({
   orientation,
 }: CardContainerProps) => {
   const dimensions = orientation === "vertical" 
-    ? theme.card.dimensions.vertical 
-    : theme.card.dimensions.horizontal;
+    ? MEASUREMENTS.CARD.DIMENSIONS.VERTICAL 
+    : MEASUREMENTS.CARD.DIMENSIONS.HORIZONTAL;
 
   return (
     <div
       className={cn(
         "crypto-card",
-        ...theme.card.decorations.base,
-        ...theme.card.decorations.effects
+        ...THEME.decorations.base,
+        ...THEME.decorations.effects
       )}
       style={
         {
-          "--card-width": dimensions.width,
-          "--card-height": dimensions.height,
+          "--card-width": dimensions.WIDTH,
+          "--card-height": dimensions.HEIGHT,
           width: "var(--card-width)",
           height: "var(--card-height)",
         } as React.CSSProperties

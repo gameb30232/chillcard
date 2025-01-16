@@ -1,5 +1,5 @@
-import { CARD_CONFIG } from "@/config/constants";
-import { theme } from "@/config/theme";
+import { APP_SETTINGS } from "@/config";
+import { MEASUREMENTS } from "@/config";
 
 // Pure function to generate mnemonic spaces
 export const generateMnemonicSpaces = (length: 12 | 24) =>
@@ -13,7 +13,7 @@ export const formatAddress = (address: string) => ({
 
 // Get card dimensions based on orientation
 export const getCardDimensions = (orientation: "horizontal" | "vertical") =>
-  theme.card.dimensions[orientation];
+  MEASUREMENTS.CARD.DIMENSIONS[orientation.toUpperCase()];
 
 export const getQRCodeSize = (isVertical: boolean) =>
-  theme.card.elements.qr.sizes[isVertical ? 'vertical' : 'horizontal'];
+  MEASUREMENTS.QR.SIZE[isVertical ? 'VERTICAL' : 'HORIZONTAL'];

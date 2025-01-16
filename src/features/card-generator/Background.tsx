@@ -1,6 +1,6 @@
 import { type CSSProperties } from "react";
 import { cn } from "@/lib/utils";
-import { theme } from "@/config/theme";
+import { THEME } from "@/config/ui/theme";
 import type { BackgroundProps } from "@/types/card";
 
 export const Background = ({ backgroundImage, color }: BackgroundProps) => (
@@ -16,8 +16,8 @@ export const Background = ({ backgroundImage, color }: BackgroundProps) => (
         style={{ "--color": color } as CSSProperties}
       />
     )}
-    <div className={cn(...theme.card.decorations.overlay)} />
-    <div className={cn(...theme.card.decorations.gradients.top)} />
-    <div className={cn(...theme.card.decorations.gradients.bottom)} />
+    <div className={cn(...THEME.decorations.overlay)} />
+    <div className={cn(...THEME.decorations.gradients.top)} />
+    <div className={cn(...THEME.decorations.gradients.bottom)} />
   </>
 );

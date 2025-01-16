@@ -17,9 +17,9 @@ import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
 import { useReactToPrint } from "react-to-print";
 
-import { CRYPTOCURRENCIES } from "@/config/chains";
-import { CardData } from "@/types/card";
-import { BRANDING, UI, CARD_DIMENSIONS } from "@/config/constants";
+import { CRYPTOCURRENCIES } from "@/config";
+import { BRANDING } from "@/config";
+import { UI_TEXT } from "@/config";
 import { cn } from "@/lib/utils";
 
 export const Generator = () => {
@@ -60,9 +60,9 @@ export const Generator = () => {
     reader.readAsDataURL(file);
   };
 
-  const cardData: CardData = {
+  const cardData = {
     chain: selectedChain,
-    address: address || UI.FORM.WALLET_ADDRESS.DEFAULT_TEXT,
+    address: address || UI_TEXT.FORM.WALLET_ADDRESS.DEFAULT_TEXT,
     orientation,
     backgroundImage,
     mnemonicLength,
@@ -81,7 +81,7 @@ export const Generator = () => {
         <div className="bg-white rounded-2xl p-6 shadow-sm space-y-6">
           <div className="grid gap-4">
             <div className="space-y-2">
-              <Label htmlFor="crypto">{UI.FORM.CRYPTO_CURRENCY.LABEL}</Label>
+              <Label htmlFor="crypto">{UI_TEXT.FORM.CRYPTO_CURRENCY.LABEL}</Label>
               <Select
                 value={selectedChain.symbol}
                 onValueChange={(value) => {
@@ -93,7 +93,7 @@ export const Generator = () => {
               >
                 <SelectTrigger className="w-full">
                   <SelectValue
-                    placeholder={UI.FORM.CRYPTO_CURRENCY.PLACEHOLDER}
+                    placeholder={UI_TEXT.FORM.CRYPTO_CURRENCY.PLACEHOLDER}
                   />
                 </SelectTrigger>
                 <SelectContent>
@@ -107,10 +107,10 @@ export const Generator = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="address">{UI.FORM.WALLET_ADDRESS.LABEL}</Label>
+              <Label htmlFor="address">{UI_TEXT.FORM.WALLET_ADDRESS.LABEL}</Label>
               <Input
                 id="address"
-                placeholder={UI.FORM.WALLET_ADDRESS.PLACEHOLDER}
+                placeholder={UI_TEXT.FORM.WALLET_ADDRESS.PLACEHOLDER}
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
                 className="font-mono"
@@ -119,7 +119,7 @@ export const Generator = () => {
 
             <div className="space-y-2">
               <Label htmlFor="background">
-                {UI.FORM.BACKGROUND_IMAGE.LABEL}
+                {UI_TEXT.FORM.BACKGROUND_IMAGE.LABEL}
               </Label>
               <Input
                 id="background"
@@ -129,7 +129,7 @@ export const Generator = () => {
                 className="cursor-pointer"
               />
               <p className="text-xs text-slate-500">
-                {UI.FORM.BACKGROUND_IMAGE.MAX_SIZE_TEXT}
+                {UI_TEXT.FORM.BACKGROUND_IMAGE.MAX_SIZE_TEXT}
               </p>
             </div>
           </div>
@@ -145,7 +145,7 @@ export const Generator = () => {
                   }
                 />
                 <Label htmlFor="mnemonic-length">
-                  {UI.FORM.TOGGLES.TWENTY_FOUR_WORD}
+                  {UI_TEXT.FORM.TOGGLES.TWENTY_FOUR_WORD}
                 </Label>
               </div>
               <div className="flex items-center gap-2">
@@ -157,7 +157,7 @@ export const Generator = () => {
                   }
                 />
                 <Label htmlFor="vertical-mode">
-                  {UI.FORM.TOGGLES.VERTICAL_CARD}
+                  {UI_TEXT.FORM.TOGGLES.VERTICAL_CARD}
                 </Label>
               </div>
             </div>
@@ -170,7 +170,7 @@ export const Generator = () => {
             </p>
             <Button onClick={onPrintClick} className="gap-2">
               <Printer className="h-4 w-4" />
-              {UI.BUTTONS.PRINT}
+              {UI_TEXT.BUTTONS.PRINT}
             </Button>
           </div>
         </div>

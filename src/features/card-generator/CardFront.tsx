@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { theme } from "@/config/theme";
+import { THEME } from "@/config";
 import { formatAddress } from "@/features/card-generator/utils/card";
 import { Background } from "@/features/card-generator/Background";
 import { QRCode } from "@/features/card-generator/QRCode";
@@ -30,22 +30,22 @@ export const CardFront = ({
               <img
                 src={chain.logo}
                 alt={`${chain.name} logo`}
-                className={cn(theme.card.elements.logo.size)}
+                className={cn(THEME.elements.logo.size)}
               />
             )}
             <h2 className={cn(
-              theme.card.typography.title.size,
-              theme.card.typography.title.weight,
-              theme.card.typography.title.tracking,
+              THEME.typography.title.size,
+              THEME.typography.title.weight,
+              THEME.typography.title.tracking,
               "text-white"
             )}>
               {chain.name}
             </h2>
           </div>
           <p className={cn(
-            theme.card.typography.symbol.size,
-            theme.card.typography.symbol.family,
-            theme.card.typography.symbol.tracking,
+            THEME.typography.symbol.size,
+            THEME.typography.symbol.family,
+            THEME.typography.symbol.tracking,
             "text-gray-400 pl-9"
           )}>
             {chain.symbol}
@@ -62,9 +62,9 @@ export const CardFront = ({
               isVertical ? "w-[110px]" : "w-[100px]"
             )}>
               <p className={cn(
-                theme.card.typography.address.size,
-                theme.card.typography.address.family,
-                theme.card.typography.address.color
+                THEME.typography.address.size,
+                THEME.typography.address.family,
+                THEME.typography.address.color
               )}>
                 {firstHalf}
                 <br />
