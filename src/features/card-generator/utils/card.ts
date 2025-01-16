@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { CARD_CONFIG, CARD_DIMENSIONS } from "@/constants";
+import { CARD_CONFIG, CARD_DIMENSIONS } from "@/config/constants";
 
 // Pure function to generate mnemonic spaces
 export const generateMnemonicSpaces = (length: 12 | 24) =>

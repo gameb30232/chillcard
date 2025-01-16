@@ -1,5 +1,5 @@
 import { type CSSProperties } from "react";
-import { cardStyles } from "@/utils/card";
+import { cardStyles } from "@/features/card-generator/utils/card";
 import type { BackgroundProps } from "@/types/card";
 
 export const Background = ({ backgroundImage, color }: BackgroundProps) => (

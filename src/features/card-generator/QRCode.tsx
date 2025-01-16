@@ -1,8 +1,11 @@
 import { QRCodeSVG } from "qrcode.react";
 import { cn } from "@/lib/utils";
-import { cardStyles, getQRCodeSize } from "@/utils/card";
+import {
+  cardStyles,
+  getQRCodeSize,
+} from "@/features/card-generator/utils/card";
 import type { QRCodeProps } from "@/types/card";
-import { CARD_CONFIG } from "@/constants";
+import { CARD_CONFIG } from "@/config/constants";
 
 export const QRCode = ({ address, isVertical }: QRCodeProps) => (
   <div className={cardStyles.qrContainer}>

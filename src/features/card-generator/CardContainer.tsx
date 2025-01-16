@@ -1,6 +1,9 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
-import { cardStyles, getCardDimensions } from "@/utils/card";
+import {
+  cardStyles,
+  getCardDimensions,
+} from "@/features/card-generator/utils/card";
 
 interface CardContainerProps {
   children: ReactNode;

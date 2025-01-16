@@ -1,7 +1,7 @@
 import { useState, useRef, type MouseEvent } from "react";
-import { CardFront } from "@/components/card/CardFront";
-import { CardBack } from "@/components/card/CardBack";
-import { CardContainer } from "@/components/card/CardContainer";
+import { CardFront } from "@/features/card-generator/CardFront";
+import { CardBack } from "@/features/card-generator/CardBack";
+import { CardContainer } from "@/features/card-generator/CardContainer";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -17,9 +17,9 @@ import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
 import { useReactToPrint } from "react-to-print";
 
-import { CRYPTOCURRENCIES } from "@/data/chains";
+import { CRYPTOCURRENCIES } from "@/config/chains";
 import { CardData } from "@/types/card";
-import { BRANDING, UI, CARD_DIMENSIONS } from "@/constants";
+import { BRANDING, UI, CARD_DIMENSIONS } from "@/config/constants";
 import { cn } from "@/lib/utils";
 
 export const Generator = () => {

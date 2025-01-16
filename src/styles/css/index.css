@@ -1,4 +1,4 @@
-@import './styles/base.css';
-@import './styles/themes.css';
-@import './styles/cards.css';
-@import './styles/print.css';
+@import '@/styles/css/base.css';
+@import '@/styles/css/themes.css';
+@import '@/styles/css/cards.css';
+@import '@/styles/css/print.css';
