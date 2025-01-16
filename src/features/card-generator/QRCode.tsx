@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { cn } from "@/lib/utils";
+import { theme } from "@/config/theme";
 import type { QRCodeProps } from "@/types/card";
 
 interface ExtendedQRCodeProps extends QRCodeProps {
@@ -13,12 +14,14 @@ export const QRCode = ({ address, isVertical, logo }: ExtendedQRCodeProps) => {
   useEffect(() => {
     if (!ref.current) return;
 
-    const containerSize = isVertical ? 86 : 76;
+    const size = isVertical 
+      ? theme.card.elements.qr.sizes.vertical 
+      : theme.card.elements.qr.sizes.horizontal;
 
     const qrCode = new QRCodeStyling({
       type: "svg",
-      width: containerSize,
-      height: containerSize,
+      width: size,
+      height: size,
       data: address,
       margin: 0,
       image: logo,
@@ -60,8 +63,10 @@ export const QRCode = ({ address, isVertical, logo }: ExtendedQRCodeProps) => {
   return (
     <div
       className={cn(
-        "rounded-lg bg-white/90 shadow-sm overflow-hidden",
-        isVertical ? "w-[86px] h-[86px]" : "w-[76px] h-[76px]",
+        "rounded-lg overflow-hidden",
+        theme.card.elements.qr.background,
+        theme.card.elements.qr.shadow,
+        isVertical ? "w-[86px] h-[86px]" : "w-[76px] h-[76px]"
       )}
     >
       <div ref={ref} className="w-full h-full" />

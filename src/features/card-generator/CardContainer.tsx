@@ -1,9 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
-import {
-  cardStyles,
-  getCardDimensions,
-} from "@/features/card-generator/utils/card";
+import { theme } from "@/config/theme";
 
 interface CardContainerProps {
   children: ReactNode;
@@ -14,20 +11,21 @@ export const CardContainer = ({
   children,
   orientation,
 }: CardContainerProps) => {
-  const dimensions = getCardDimensions(orientation);
+  const dimensions = orientation === "vertical" 
+    ? theme.card.dimensions.vertical 
+    : theme.card.dimensions.horizontal;
 
   return (
     <div
       className={cn(
         "crypto-card",
-        cardStyles.base,
-        "shadow-[0_0_15px_rgba(0,0,0,0.2)] hover:shadow-[0_0_25px_rgba(0,0,0,0.3)]",
-        //"hover:scale-105",
+        ...theme.card.decorations.base,
+        ...theme.card.decorations.effects
       )}
       style={
         {
-          "--card-width": dimensions.WIDTH,
-          "--card-height": dimensions.HEIGHT,
+          "--card-width": dimensions.width,
+          "--card-height": dimensions.height,
           width: "var(--card-width)",
           height: "var(--card-height)",
         } as React.CSSProperties

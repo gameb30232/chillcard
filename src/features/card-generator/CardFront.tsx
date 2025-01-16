@@ -1,7 +1,5 @@
-import { QRCodeSVG } from "qrcode.react";
 import { cn } from "@/lib/utils";
-import { CSSProperties } from "react";
-import { CARD_CONFIG, CLASSES } from "@/config/constants";
+import { theme } from "@/config/theme";
 import { formatAddress } from "@/features/card-generator/utils/card";
 import { Background } from "@/features/card-generator/Background";
 import { QRCode } from "@/features/card-generator/QRCode";
@@ -23,41 +21,51 @@ export const CardFront = ({
       <div
         className={cn(
           "relative flex h-full z-10",
-          isVertical ? "flex-col items-center" : "items-start justify-between",
+          isVertical ? "flex-col items-center" : "items-start justify-between"
         )}
       >
         <div className="flex flex-col relative z-20">
-          <div className="flex items-center gap-3 mb-2">
+          <div className={cn("flex items-center gap-3 mb-2")}>
             {chain.logo && (
               <img
                 src={chain.logo}
                 alt={`${chain.name} logo`}
-                className="w-6 h-6"
+                className={cn(theme.card.elements.logo.size)}
               />
             )}
-            <h2 className="text-white font-bold text-2xl tracking-tight">
+            <h2 className={cn(
+              theme.card.typography.title.size,
+              theme.card.typography.title.weight,
+              theme.card.typography.title.tracking,
+              "text-white"
+            )}>
               {chain.name}
             </h2>
           </div>
-          <p className="text-gray-400 text-sm font-mono tracking-wider pl-9">
+          <p className={cn(
+            theme.card.typography.symbol.size,
+            theme.card.typography.symbol.family,
+            theme.card.typography.symbol.tracking,
+            "text-gray-400 pl-9"
+          )}>
             {chain.symbol}
           </p>
         </div>
 
-        <div
-          className={cn(
-            "relative z-10 flex flex-col items-center",
-            isVertical ? "mt-auto" : "",
-          )}
-        >
+        <div className={cn(
+          "relative z-10 flex flex-col items-center",
+          isVertical ? "mt-auto" : ""
+        )}>
           <div className="flex flex-col items-center mb-2">
-            <div
-              className={cn(
-                "text-center",
-                isVertical ? "w-[110px]" : "w-[100px]",
-              )}
-            >
-              <p className={cn(CLASSES.ADDRESS_TEXT, "text-[8px]")}>
+            <div className={cn(
+              "text-center",
+              isVertical ? "w-[110px]" : "w-[100px]"
+            )}>
+              <p className={cn(
+                theme.card.typography.address.size,
+                theme.card.typography.address.family,
+                theme.card.typography.address.color
+              )}>
                 {firstHalf}
                 <br />
                 {secondHalf}
