@@ -1,3 +1,17 @@
+## Recent Updates
+
+### Theme & Layout Improvements (January 2025)
+- ✨ Consolidated all measurements into centralized theme system in `theme.ts`
+- 🎨 Streamlined card styling with removal of duplicate CSS
+- 🖨️ Added print-specific theme values
+- 🏗️ Improved overall theme structure organization
+- 🔄 Simplified card utilities to use theme configuration
+
+### QR Code Enhancements
+- ➕ Added chain logo integration in QR codes
+- 🎯 Implemented logo styling with background dot hiding
+- 🔧 Configured logo to take up 20% of QR code size
+
 ## Getting Started
 
 Follow these steps to run the application locally:
@@ -80,6 +94,7 @@ src/
 ├── config/             # Application configuration
 │   ├── chains.ts       # Cryptocurrency configurations
 │   ├── constants.ts    # Global constants
+│   ├── theme.ts        # Centralized theme configuration
 │   └── layout.ts       # Layout measurements
 ├── features/           # Feature modules
 │   └── card-generator/ # Card generation feature
