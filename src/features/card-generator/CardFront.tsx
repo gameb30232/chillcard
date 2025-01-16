@@ -5,6 +5,8 @@ import { formatAddress } from "@/features/card-generator/utils/card";
 import { Background } from "@/features/card-generator/Background";
 import { QRCode } from "@/features/card-generator/QRCode";
 import type { CardFrontProps } from "@/types/card";
+import { Input } from "@/components/ui/input";
+import { UI_TEXT } from "@/config";
 import {
   Popover,
   PopoverContent,
@@ -17,9 +19,14 @@ export const CardFront = ({
   orientation,
   backgroundImage,
   onChainSelect,
-}: CardFrontProps & { onChainSelect?: (chain: typeof CRYPTOCURRENCIES[0]) => void }) => {
+  onAddressChange,
+}: CardFrontProps & { 
+  onChainSelect?: (chain: typeof CRYPTOCURRENCIES[0]) => void;
+  onAddressChange?: (address: string) => void;
+}) => {
   const isVertical = orientation === "vertical";
-  const { firstHalf, secondHalf } = formatAddress(address);
+  const displayAddress = address || UI_TEXT.FORM.WALLET_ADDRESS.DEFAULT_TEXT;
+  const { firstHalf, secondHalf } = formatAddress(displayAddress);
 
   return (
     <>
@@ -94,24 +101,41 @@ export const CardFront = ({
           "relative z-10 flex flex-col items-center",
           isVertical ? "mt-auto" : ""
         )}>
-          <div className="flex flex-col items-center mb-2">
-            <div className={cn(
-              "text-center",
-              isVertical ? "w-[110px]" : "w-[100px]"
-            )}>
-              <p className={cn(
-                THEME.typography.address.size,
-                THEME.typography.address.family,
-                THEME.typography.address.color
-              )}>
-                {firstHalf}
-                <br />
-                {secondHalf}
-              </p>
-            </div>
-          </div>
-
-          <QRCode address={address} isVertical={isVertical} logo={chain.logo} />
+          <Popover>
+            <PopoverTrigger asChild>
+              <div className="flex flex-col items-center cursor-pointer interactive-element">
+                <div className={cn(
+                  "text-center mb-2",
+                  isVertical ? "w-[110px]" : "w-[100px]"
+                )}>
+                  <p className={cn(
+                    THEME.typography.address.size,
+                    THEME.typography.address.family,
+                    THEME.typography.address.color,
+                    !address && "text-muted-foreground"
+                  )}>
+                    {firstHalf}
+                    <br />
+                    {secondHalf}
+                  </p>
+                </div>
+                <QRCode address={displayAddress} isVertical={isVertical} logo={chain.logo} />
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <div className="grid gap-4">
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">{UI_TEXT.FORM.WALLET_ADDRESS.LABEL}</h4>
+                  <Input
+                    id="address"
+                    placeholder={UI_TEXT.FORM.WALLET_ADDRESS.PLACEHOLDER}
+                    value={address}
+                    onChange={(e) => onAddressChange?.(e.target.value)}
+                  />
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
     </>

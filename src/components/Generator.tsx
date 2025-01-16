@@ -49,7 +49,7 @@ export const Generator = () => {
 
   const cardData = {
     chain: selectedChain,
-    address: address || UI_TEXT.FORM.WALLET_ADDRESS.DEFAULT_TEXT,
+    address,
     orientation,
     backgroundImage,
     mnemonicLength,
@@ -76,7 +76,11 @@ export const Generator = () => {
           )}
         >
           <CardContainer orientation={orientation}>
-            <CardFront {...cardData} onChainSelect={setSelectedChain} />
+            <CardFront 
+              {...cardData} 
+              onChainSelect={setSelectedChain} 
+              onAddressChange={setAddress}
+            />
           </CardContainer>
           <CardContainer orientation={orientation}>
             <CardBack
