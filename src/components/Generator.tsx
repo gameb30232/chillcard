@@ -96,6 +96,7 @@ export const Generator = () => {
               {...cardData} 
               onChainSelect={setSelectedChain} 
               onAddressChange={setAddress}
+              onBackgroundImageChange={handleImageUpload}
             />
           </CardContainer>
           <CardContainer orientation={orientation}>

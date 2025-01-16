@@ -18,7 +18,9 @@ export const CardContainer = ({
   return (
     <div
       className={cn(
-        "crypto-card",
+        "crypto-card relative",
+        "hover:shadow-2xl hover:-translate-y-1",
+        "active:translate-y-0 active:shadow-xl",
         ...THEME.decorations.base,
         ...THEME.decorations.effects
       )}
@@ -28,6 +30,7 @@ export const CardContainer = ({
           "--card-height": dimensions.HEIGHT,
           width: "var(--card-width)",
           height: "var(--card-height)",
+          transition: "transform 0.2s ease, box-shadow 0.2s ease",
         } as React.CSSProperties
       }
     >
