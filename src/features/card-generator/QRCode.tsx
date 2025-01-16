@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
 import QRCodeStyling from "qr-code-styling";
 import { cn } from "@/lib/utils";
-import {
-  cardStyles,
-  getQRCodeSize,
-} from "@/features/card-generator/utils/card";
 import type { QRCodeProps } from "@/types/card";
 
-export const QRCode = ({ address, isVertical }: QRCodeProps) => {
+interface ExtendedQRCodeProps extends QRCodeProps {
+  logo?: string;
+}
+
+export const QRCode = ({ address, isVertical, logo }: ExtendedQRCodeProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,6 +21,13 @@ export const QRCode = ({ address, isVertical }: QRCodeProps) => {
       height: containerSize,
       data: address,
       margin: 0,
+      image: logo,
+      imageOptions: {
+        hideBackgroundDots: true,
+        imageSize: 0.2,
+        margin: 1,
+        crossOrigin: "anonymous",
+      },
       qrOptions: {
         mode: "Byte",
         errorCorrectionLevel: "Q",
@@ -48,7 +55,7 @@ export const QRCode = ({ address, isVertical }: QRCodeProps) => {
     }
 
     qrCode.append(ref.current);
-  }, [address, isVertical]);
+  }, [address, isVertical, logo]);
 
   return (
     <div

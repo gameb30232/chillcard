@@ -65,7 +65,7 @@ export const CardFront = ({
             </div>
           </div>
 
-          <QRCode address={address} isVertical={isVertical} />
+          <QRCode address={address} isVertical={isVertical} logo={chain.logo} />
         </div>
       </div>
     </>
