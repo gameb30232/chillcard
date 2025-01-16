@@ -56,12 +56,28 @@ export const Generator = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 relative">
+      <div className="snowfall-container fixed inset-0 pointer-events-none" aria-hidden="true">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="snowflake absolute animate-snowfall"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`
+            }}
+          >
+            {BRANDING.THEME.ACCENT_EMOJI}
+          </div>
+        ))}
+      </div>
+
       <header className="text-center space-y-2">
-        <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent">
+        <h1 className="brand-title">
           {BRANDING.APP_NAME}
         </h1>
-        <p className="text-slate-600">{BRANDING.TAGLINE}</p>
+        <p className="brand-tagline">{BRANDING.TAGLINE}</p>
       </header>
 
       <div className="flex justify-center items-center">
@@ -92,7 +108,7 @@ export const Generator = () => {
       </div>
 
       <div className="flex justify-center">
-        <Button onClick={onPrintClick} className="gap-2">
+        <Button onClick={onPrintClick} className="print-button gap-2">
           <Printer className="h-4 w-4" />
           {UI_TEXT.BUTTONS.PRINT}
         </Button>
