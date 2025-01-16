@@ -5,22 +5,32 @@
     size: auto;
   }
 
-  .controls {
+  /* Remove UI elements */
+  .controls, header, button {
     display: none !important;
   }
 
-  .crypto-card {
-    break-inside: avoid;
-    width: var(--card-width) !important;
-    height: var(--card-height) !important;
+  /* Remove frost/glass effects from UI */
+  body {
+    background: white !important;
   }
 
+  /* Remove background from containers but keep card backgrounds */
   .no-print-bg {
     background: none !important;
     box-shadow: none !important;
     padding: 0 !important;
   }
 
+  /* Keep card styles but remove frost effects */
+  .crypto-card {
+    break-inside: avoid;
+    width: var(--card-width) !important;
+    height: var(--card-height) !important;
+    backdrop-filter: none !important;
+  }
+
+  /* Keep spacing between cards */
   .cards-container {
     gap: 20mm !important;
   }
@@ -34,5 +44,16 @@
   .cards-container[data-orientation="horizontal"] {
     flex-direction: column !important;
     align-items: center !important;
+  }
+
+  /* Remove frost/glass effects from popovers and interactive elements */
+  .frost-effect, .glass-effect {
+    backdrop-filter: none !important;
+    background: none !important;
+  }
+
+  /* Hide interactive elements when printing */
+  .interactive-element::after {
+    display: none !important;
   }
 }

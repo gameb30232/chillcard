@@ -11,3 +11,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .frost-effect {
+    @apply bg-[hsl(var(--frost-bg))] border-[hsl(var(--frost-border))] shadow-[0_4px_24px_-1px_hsl(var(--frost-shadow))];
+    backdrop-filter: blur(12px);
+  }
+
+  .glass-effect {
+    @apply bg-[hsl(var(--glass-bg))] border-[hsl(var(--glass-border))] shadow-[0_8px_32px_-2px_hsl(var(--glass-shadow))];
+    backdrop-filter: blur(16px);
+  }
+
+  .interactive-hover {
+    @apply transition-all duration-200 hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .card-hover {
+    @apply hover:shadow-lg hover:brightness-105 transition-all duration-300;
+  }
+}

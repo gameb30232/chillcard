@@ -1,8 +1,32 @@
 @layer components {
   .crypto-card {
+    @apply frost-effect interactive-hover;
+    @apply rounded-2xl border overflow-hidden relative;
+    @apply transition-all duration-300;
     break-inside: avoid;
     width: var(--card-width);
     height: var(--card-height);
+  }
+
+  .crypto-card-content {
+    @apply glass-effect;
+    @apply absolute inset-0 z-10;
+    @apply p-6 flex flex-col;
+  }
+
+  .crypto-card-background {
+    @apply absolute inset-0;
+    @apply bg-cover bg-center bg-no-repeat;
+    @apply transition-transform duration-300;
+  }
+
+  .crypto-card:hover .crypto-card-background {
+    @apply scale-105;
+  }
+
+  .crypto-select {
+    @apply frost-effect card-hover;
+    @apply rounded-xl p-3 cursor-pointer;
   }
 
   .cards-container {
@@ -17,5 +41,23 @@
   .cards-container[data-orientation="horizontal"] {
     flex-direction: column;
     align-items: center;
+  }
+
+  .interactive-element {
+    @apply cursor-pointer relative;
+    @apply hover:opacity-80 active:opacity-100;
+    @apply transition-all duration-200;
+  }
+
+  .interactive-element::after {
+    content: '';
+    @apply absolute inset-0;
+    @apply bg-primary/10 opacity-0;
+    @apply transition-opacity duration-200;
+    @apply rounded-lg;
+  }
+
+  .interactive-element:hover::after {
+    @apply opacity-100;
   }
 }
