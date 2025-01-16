@@ -1,9 +1,4 @@
-export interface Chain {
-  name: string;
-  symbol: string;
-  logo: string;
-  color: string;
-}
+import { Chain } from '@/config/chains/types';
 
 export interface CardData {
   chain: Chain;
