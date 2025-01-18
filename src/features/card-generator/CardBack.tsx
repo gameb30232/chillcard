@@ -1,5 +1,5 @@
 import { Background } from "@/features/card-generator/Background";
-import { MnemonicGrid } from "@/features/card-generator/MnemonicGrid";
+import { MnemonicGrid } from "@/features/card-generator/components/MnemonicGrid";
 import { RecoveryLabel } from "@/features/card-generator/components/RecoveryLabel";
 import { CardFooter } from "@/features/card-generator/components/CardFooter";
 import type { CardBackProps } from "@/types/card";

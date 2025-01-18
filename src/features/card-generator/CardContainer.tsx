@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
-import { dimensions, baseConstants, createCardLayout } from "@/config/layout";
+import { baseConstants, createCardLayout } from "@/config/layout";
 
 interface CardContainerProps {
   children: ReactNode;

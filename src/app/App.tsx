@@ -1,4 +1,4 @@
-import { useState, useRef, type MouseEvent } from "react";
+import { useState, useRef, useEffect, type MouseEvent } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -10,7 +10,7 @@ import { Printer } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useReactToPrint } from "react-to-print";
 
-import { CRYPTOCURRENCIES } from "@/config";
+import { CRYPTOCURRENCIES, STATIC_CRYPTOCURRENCIES, updateCryptocurrencies } from "@/config";
 import { BRANDING } from "@/config";
 import { UI_TEXT } from "@/config";
 import { cn } from "@/lib/utils";
@@ -26,13 +26,29 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [selectedChain, setSelectedChain] = useState(CRYPTOCURRENCIES[0]);
+  const [selectedChain, setSelectedChain] = useState(STATIC_CRYPTOCURRENCIES[0]);
   const [address, setAddress] = useState("");
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">("horizontal");
   const [mnemonicLength, setMnemonicLength] = useState<12 | 24>(24);
   const [backgroundImage, setBackgroundImage] = useState<string>("");
+  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
   const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const initData = async () => {
+      try {
+        await updateCryptocurrencies();
+        setSelectedChain(CRYPTOCURRENCIES[0]);
+      } catch (error) {
+        console.error('Failed to initialize cryptocurrency data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initData();
+  }, []);
 
   const handlePrint = useReactToPrint({
     contentRef: cardsRef,
@@ -66,6 +82,14 @@ const App = () => {
     orientation,
     backgroundImage,
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
+        <div className="text-white">Loading cryptocurrencies...</div>
+      </div>
+    );
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
