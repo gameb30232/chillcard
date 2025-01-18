@@ -22,49 +22,40 @@ export const CardFront = ({
   onAddressChange,
   onBackgroundImageChange,
 }: CardFrontProps & { 
-  onChainSelect?: (chain: typeof CRYPTOCURRENCIES[0]) => void;
+  onChainSelect?: (chain: Chain) => void;
   onAddressChange?: (address: string) => void;
   onBackgroundImageChange?: (file: File) => void;
 }) => {
   const { cardLayout } = createCardLayout(orientation);
   const { qrCode } = cardLayout;
   const displayAddress = address || UI_TEXT.FORM.WALLET_ADDRESS.DEFAULT_TEXT;
-  const { firstHalf, secondHalf } = formatAddress(displayAddress);
 
   return (
-    <>
-      <Background 
-        backgroundImage={backgroundImage} 
+    <div className="relative">
+      <Background
         color={chain.color}
+        image={backgroundImage}
         onImageUpload={onBackgroundImageChange}
       />
-
-      <div className="relative z-20 h-full">
-        <CryptoIdentifier
-          chain={chain}
-          orientation={orientation}
-          onChainSelect={onChainSelect}
-        />
-
-        <WalletAddress
-          address={address}
-          orientation={orientation}
-        />
-
-        <div 
-          className="absolute bg-white overflow-hidden"
-          style={{
-            left: qrCode.x,
-            top: qrCode.y,
-            width: qrCode.width,
-            height: qrCode.height,
-            padding: qrCode.padding,
-            borderRadius: qrCode.borderRadius,
-          }}
-        >
-          <QRCode address={address} isVertical={orientation === "vertical"} />
-        </div>
-      </div>
-    </>
+      <CryptoIdentifier
+        selectedChain={chain}
+        onChainSelect={onChainSelect}
+      />
+      <WalletAddress
+        address={displayAddress}
+        onChange={onAddressChange}
+      />
+      <QRCode
+        address={displayAddress}
+        chain={chain}
+        style={{
+          position: 'absolute',
+          left: qrCode.x,
+          top: qrCode.y,
+          width: qrCode.size,
+          height: qrCode.size,
+        }}
+      />
+    </div>
   );
 };

@@ -10,7 +10,7 @@ import { Printer } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useReactToPrint } from "react-to-print";
 
-import { CRYPTOCURRENCIES, fetchCryptocurrencies } from "@/config";
+import { CRYPTOCURRENCIES } from "@/config/chains/data";
 import { BRANDING } from "@/config";
 import { UI_TEXT } from "@/config";
 import { cn } from "@/lib/utils";
@@ -27,36 +27,18 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [selectedChain, setSelectedChain] = useState<Chain | null>(null);
+  const [selectedChain, setSelectedChain] = useState<Chain>(CRYPTOCURRENCIES[0]);
   const [address, setAddress] = useState("");
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">("horizontal");
   const [mnemonicLength, setMnemonicLength] = useState<12 | 24>(24);
-  const [backgroundImage, setBackgroundImage] = useState<string>("");
-  const [loading, setLoading] = useState(true);
+  const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const cardsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const initData = async () => {
-      try {
-        const data = await fetchCryptocurrencies();
-        CRYPTOCURRENCIES.length = 0; // Clear existing
-        CRYPTOCURRENCIES.push(...data); // Update with new data
-        setSelectedChain(data[0]);
-      } catch (error) {
-        console.error('Failed to fetch cryptocurrency data:', error);
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Failed to load cryptocurrency data. Please try again later.",
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    initData();
-  }, [toast]);
+    setLoading(false);
+  }, []);
 
   const handlePrint = useReactToPrint({
     contentRef: cardsRef,
