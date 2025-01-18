@@ -1,7 +1,16 @@
 import { createCardBackLayout } from "@/config/layout";
 import { generateMnemonicSpaces } from "@/features/card-generator/utils/card";
 import type { MnemonicGridProps } from "@/types/card";
-import { MnemonicSpace } from "@/features/card-generator/MnemonicSpace";
+
+// Internal component
+const MnemonicSpace = ({ number }: { number: number }) => (
+  <div className="relative">
+    <div className="absolute -left-2.5 text-gray-500 text-[8px]">{number}</div>
+    <div className="w-full border-b border-gray-700/30">
+      <span className="text-transparent select-none">________________</span>
+    </div>
+  </div>
+);
 
 export const MnemonicGrid = ({
   mnemonicLength,

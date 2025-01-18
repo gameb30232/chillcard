@@ -1,74 +1,39 @@
-import { cn } from "@/lib/utils";
-import { UI_TEXT } from "@/config";
+import { Background } from "@/features/card-generator/Background";
 import { MnemonicGrid } from "@/features/card-generator/MnemonicGrid";
+import { RecoveryLabel } from "@/features/card-generator/components/RecoveryLabel";
+import { CardFooter } from "@/features/card-generator/components/CardFooter";
 import type { CardBackProps } from "@/types/card";
 import { createCardBackLayout } from "@/config/layout";
 
-export const CardBack = ({ mnemonicLength, orientation }: CardBackProps) => {
+export const CardBack = ({
+  mnemonicLength,
+  orientation,
+  onBackgroundImageChange,
+}: CardBackProps & {
+  onBackgroundImageChange?: (file: File) => void;
+}) => {
   const { cardLayout } = createCardBackLayout(orientation);
-  const { header, grid, footer } = cardLayout;
 
   return (
-    <div className="relative h-full">
-      <div className="relative z-10 h-full flex flex-col">
-        <div 
-          className="flex items-center justify-between"
-          style={{
-            marginBottom: header.marginBottom,
-            padding: header.padding,
-          }}
-        >
-          <h3 
-            className="text-white font-medium"
-            style={{ 
-              fontSize: header.title.fontSize,
-              opacity: header.title.opacity,
-              letterSpacing: header.title.letterSpacing,
-            }}
-          >
-            {header.text.title}
-          </h3>
-          <span 
-            className="text-gray-400"
-            style={{ 
-              fontSize: header.subtitle.fontSize,
-              opacity: header.subtitle.opacity,
-            }}
-          >
-            {mnemonicLength} {header.text.wordCountSuffix}
-          </span>
-        </div>
+    <>
+      <Background
+        color="#000000"
+        onImageUpload={onBackgroundImageChange}
+      />
 
-        <div style={{ 
-          padding: grid.padding,
-          gap: grid.gap,
-        }}>
-          <MnemonicGrid 
-            mnemonicLength={mnemonicLength} 
-            isVertical={orientation === "vertical"} 
-          />
-        </div>
+      <div className="relative z-20 h-full flex flex-col">
+        <RecoveryLabel
+          mnemonicLength={mnemonicLength}
+          orientation={orientation}
+        />
 
-        <div 
-          className="text-center"
-          style={{
-            marginTop: footer.marginTop,
-            padding: footer.padding,
-          }}
-        >
-          <p 
-            className="text-gray-400"
-            style={{ 
-              fontSize: footer.fontSize,
-              opacity: footer.opacity,
-              letterSpacing: footer.letterSpacing,
-              lineHeight: footer.lineHeight,
-            }}
-          >
-            {footer.text.instructions}
-          </p>
-        </div>
+        <MnemonicGrid
+          mnemonicLength={mnemonicLength}
+          isVertical={orientation === "vertical"}
+        />
+
+        <CardFooter orientation={orientation} />
       </div>
-    </div>
+    </>
   );
 };
