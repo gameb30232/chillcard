@@ -10,10 +10,11 @@ import { Printer } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { useReactToPrint } from "react-to-print";
 
-import { CRYPTOCURRENCIES, STATIC_CRYPTOCURRENCIES, updateCryptocurrencies } from "@/config";
+import { CRYPTOCURRENCIES, fetchCryptocurrencies } from "@/config";
 import { BRANDING } from "@/config";
 import { UI_TEXT } from "@/config";
 import { cn } from "@/lib/utils";
+import type { Chain } from "@/config/chains/types";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,7 +27,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const [selectedChain, setSelectedChain] = useState(STATIC_CRYPTOCURRENCIES[0]);
+  const [selectedChain, setSelectedChain] = useState<Chain | null>(null);
   const [address, setAddress] = useState("");
   const [orientation, setOrientation] = useState<"horizontal" | "vertical">("horizontal");
   const [mnemonicLength, setMnemonicLength] = useState<12 | 24>(24);
@@ -38,17 +39,24 @@ const App = () => {
   useEffect(() => {
     const initData = async () => {
       try {
-        await updateCryptocurrencies();
-        setSelectedChain(CRYPTOCURRENCIES[0]);
+        const data = await fetchCryptocurrencies();
+        CRYPTOCURRENCIES.length = 0; // Clear existing
+        CRYPTOCURRENCIES.push(...data); // Update with new data
+        setSelectedChain(data[0]);
       } catch (error) {
-        console.error('Failed to initialize cryptocurrency data:', error);
+        console.error('Failed to fetch cryptocurrency data:', error);
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: "Failed to load cryptocurrency data. Please try again later.",
+        });
       } finally {
         setLoading(false);
       }
     };
 
     initData();
-  }, []);
+  }, [toast]);
 
   const handlePrint = useReactToPrint({
     contentRef: cardsRef,
@@ -83,10 +91,10 @@ const App = () => {
     backgroundImage,
   };
 
-  if (loading) {
+  if (loading || !selectedChain) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
-        <div className="text-white">Loading cryptocurrencies...</div>
+        <div className="text-white text-lg">Loading cryptocurrencies...</div>
       </div>
     );
   }
