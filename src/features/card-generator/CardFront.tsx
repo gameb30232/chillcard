@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import { THEME } from "@/config";
 import { CRYPTOCURRENCIES } from "@/config";
 import { formatAddress } from "@/features/card-generator/utils/card";
 import { Background } from "@/features/card-generator/Background";
@@ -7,6 +6,7 @@ import { QRCode } from "@/features/card-generator/QRCode";
 import type { CardFrontProps } from "@/types/card";
 import { Input } from "@/components/ui/input";
 import { UI_TEXT } from "@/config";
+import { createCardLayout } from "@/config/layout";
 import {
   Popover,
   PopoverContent,
@@ -26,7 +26,8 @@ export const CardFront = ({
   onAddressChange?: (address: string) => void;
   onBackgroundImageChange?: (file: File) => void;
 }) => {
-  const isVertical = orientation === "vertical";
+  const { cardLayout } = createCardLayout(orientation);
+  const { logo, ticker, coinName, walletAddress, qrCode } = cardLayout;
   const displayAddress = address || UI_TEXT.FORM.WALLET_ADDRESS.DEFAULT_TEXT;
   const { firstHalf, secondHalf } = formatAddress(displayAddress);
 
@@ -38,120 +39,105 @@ export const CardFront = ({
         onImageUpload={onBackgroundImageChange}
       />
 
-      <div
-        className={cn(
-          "relative flex h-full z-20",
-          isVertical ? "flex-col items-center" : "items-start justify-between"
-        )}
-      >
+      <div className="relative z-20 h-full">
         <Popover>
           <PopoverTrigger asChild>
-            <div className="flex flex-col relative interactive-element group">
-              <div className={cn(
-                "flex items-center gap-3 mb-2",
-                "transition-transform duration-200 group-hover:scale-105"
-              )}>
-                {chain.logo && (
-                  <img
-                    src={chain.logo}
-                    alt={`${chain.name} logo`}
-                    className={cn(
-                      THEME.elements.logo.size,
-                      "transition-transform duration-200 group-hover:rotate-12"
-                    )}
-                  />
-                )}
-                <h2 className={cn(
-                  THEME.typography.title.size,
-                  THEME.typography.title.weight,
-                  THEME.typography.title.tracking,
-                  "text-white group-hover:text-primary-foreground"
-                )}>
-                  {chain.name}
-                </h2>
-              </div>
-              <p className={cn(
-                THEME.typography.symbol.size,
-                THEME.typography.symbol.family,
-                THEME.typography.symbol.tracking,
-                "text-gray-400 pl-9 group-hover:text-primary-foreground/80"
-              )}>
-                {chain.symbol}
-              </p>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent className="w-64 p-0" align="start">
-            <div className="grid gap-1 p-1">
-              {CRYPTOCURRENCIES.map((crypto) => (
-                <button
-                  key={crypto.symbol}
-                  className={cn(
-                    "flex items-center gap-2 rounded-lg px-2 py-1.5 text-sm",
-                    "transition-all duration-200",
-                    "hover:bg-accent/80 hover:scale-[1.02] active:scale-100",
-                    crypto.symbol === chain.symbol && "bg-accent"
-                  )}
-                  onClick={() => onChainSelect?.(crypto)}
+            <div className="interactive-element group">
+              <div 
+                className="flex items-center gap-3 mb-2"
+                style={{
+                  position: 'absolute',
+                  left: logo.x,
+                  top: logo.y,
+                }}
+              >
+                <div 
+                  className="bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors"
+                  style={{
+                    width: logo.width,
+                    height: logo.height,
+                  }}
                 >
                   <img
-                    src={crypto.logo}
-                    alt={`${crypto.name} logo`}
-                    className="w-5 h-5"
+                    src={chain.logo}
+                    alt={chain.symbol}
+                    className="w-8 h-8"
                   />
-                  <div>
-                    <div className="font-medium">{crypto.name}</div>
-                    <div className="text-xs text-muted-foreground">
-                      {crypto.symbol}
-                    </div>
-                  </div>
+                </div>
+                <div>
+                  <p
+                    style={{
+                      fontSize: ticker.fontSize,
+                      fontWeight: ticker.fontWeight,
+                      lineHeight: ticker.lineHeight,
+                      maxWidth: ticker.maxWidth,
+                    }}
+                    className="font-bold tracking-tight"
+                  >
+                    {chain.symbol}
+                  </p>
+                  <p
+                    style={{
+                      fontSize: coinName.fontSize,
+                      lineHeight: coinName.lineHeight,
+                      opacity: coinName.opacity,
+                      maxWidth: coinName.maxWidth,
+                    }}
+                    className="text-white/70"
+                  >
+                    {chain.name}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </PopoverTrigger>
+          <PopoverContent>
+            <div className="grid gap-2">
+              {CRYPTOCURRENCIES.map((c) => (
+                <button
+                  key={c.symbol}
+                  className={cn(
+                    "flex items-center gap-2 px-2 py-1 rounded hover:bg-slate-100 transition-colors",
+                    c.symbol === chain.symbol && "bg-slate-100"
+                  )}
+                  onClick={() => onChainSelect?.(c)}
+                >
+                  <img src={c.logo} alt={c.name} className="w-4 h-4" />
+                  <span className="font-medium">{c.name}</span>
+                  <span className="text-slate-500 ml-auto">{c.symbol}</span>
                 </button>
               ))}
             </div>
           </PopoverContent>
         </Popover>
 
-        <div className={cn(
-          "relative flex flex-col items-center",
-          isVertical ? "mt-auto" : ""
-        )}>
-          <Popover>
-            <PopoverTrigger asChild>
-              <div className="flex flex-col items-center interactive-element group">
-                <div className={cn(
-                  "text-center mb-2 transition-transform duration-200 group-hover:scale-105",
-                  isVertical ? "w-[110px]" : "w-[100px]"
-                )}>
-                  <p className={cn(
-                    THEME.typography.address.size,
-                    THEME.typography.address.family,
-                    THEME.typography.address.color,
-                    !address && "text-muted-foreground",
-                    "group-hover:text-primary-foreground"
-                  )}>
-                    {firstHalf}
-                    <br />
-                    {secondHalf}
-                  </p>
-                </div>
-                <div className="transition-transform duration-200 group-hover:scale-105">
-                  <QRCode address={displayAddress} isVertical={isVertical} logo={chain.logo} />
-                </div>
-              </div>
-            </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="grid gap-4">
-                <div className="space-y-2">
-                  <h4 className="font-medium leading-none">{UI_TEXT.FORM.WALLET_ADDRESS.LABEL}</h4>
-                  <Input
-                    id="address"
-                    placeholder={UI_TEXT.FORM.WALLET_ADDRESS.PLACEHOLDER}
-                    value={address}
-                    onChange={(e) => onAddressChange?.(e.target.value)}
-                  />
-                </div>
-              </div>
-            </PopoverContent>
-          </Popover>
+        <div 
+          className="absolute font-mono"
+          style={{
+            left: walletAddress.x,
+            top: walletAddress.y,
+            maxWidth: walletAddress.maxWidth,
+            fontSize: walletAddress.fontSize,
+            lineHeight: walletAddress.lineHeight,
+            fontFamily: walletAddress.fontFamily,
+          }}
+        >
+          {firstHalf}
+          <br />
+          {secondHalf}
+        </div>
+
+        <div 
+          className="absolute bg-white rounded-lg overflow-hidden"
+          style={{
+            left: qrCode.x,
+            top: qrCode.y,
+            width: qrCode.width,
+            height: qrCode.height,
+            padding: qrCode.padding,
+          }}
+        >
+          <QRCode address={address} isVertical={orientation === "vertical"} />
         </div>
       </div>
     </>
