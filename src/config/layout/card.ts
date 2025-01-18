@@ -1,11 +1,10 @@
-import { dimensions } from './dimensions';
 import { baseConstants } from './constants';
-import type { CardOrientation, Corner } from './types';
+import type { CardOrientation, Corner } from '@/types/card';
 
 const getCardDimensions = (orientation: CardOrientation) => {
   const [width, height] = orientation === 'horizontal'
-    ? [dimensions.long, dimensions.short]
-    : [dimensions.short, dimensions.long];
+    ? [baseConstants.dimensions.long, baseConstants.dimensions.short]
+    : [baseConstants.dimensions.short, baseConstants.dimensions.long];
 
   return {
     width,

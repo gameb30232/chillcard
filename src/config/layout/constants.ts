@@ -1,4 +1,8 @@
 export const baseConstants = {
+  dimensions: {
+    long: 384,
+    short: 224,
+  },
   padding: 24,
   cornerRadius: 12,
   logoSize: 48,

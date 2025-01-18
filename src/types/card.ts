@@ -1,39 +1,53 @@
-import { Chain } from '@/config/chains/types';
+import type { Chain } from "@/config/chains/types";
+
+export type CardOrientation = 'horizontal' | 'vertical';
+
+export type Corner = {
+  name: 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+  x: number;
+  y: number;
+}
 
 export interface CardData {
   chain: Chain;
   address: string;
-  orientation: Orientation;
+  orientation: CardOrientation;
   backgroundImage?: string;
   mnemonicLength: 12 | 24;
 }
 
-export type CardFrontProps = Omit<CardData, 'mnemonicLength'>
-
-export type MnemonicLength = CardData['mnemonicLength'] // This gets the type '12 | 24'
-
-export type MnemonicSpaceProps = {
-  number: number
-}
-
-export type CardBackProps = Pick<CardData, 'mnemonicLength' | 'orientation'>
-
-export type BackgroundProps = {
-  backgroundImage?: CardData['backgroundImage']
-  color: Chain['color']  // Making it required since it comes from Chain
-}
-
-export type QRCodeProps = Pick<CardData, 'address'> & {
-  isVertical: boolean;
-}
-
-export type MnemonicGridProps = Pick<CardData, 'mnemonicLength'> & {
-  isVertical: boolean;
-}
-
 export interface CardProps {
   children: React.ReactNode;
-  orientation: Orientation;
+  orientation: CardOrientation;
 }
 
-export type Orientation = "horizontal" | "vertical";
+export interface CardFrontProps {
+  chain: Chain;
+  address: string;
+  orientation: CardOrientation;
+  backgroundImage?: string;
+}
+
+export interface CardBackProps {
+  mnemonicLength: 12 | 24;
+  orientation: CardOrientation;
+}
+
+export interface QRCodeProps {
+  address: string;
+  isVertical?: boolean;
+}
+
+export interface MnemonicGridProps {
+  mnemonicLength: 12 | 24;
+  isVertical: boolean;
+}
+
+export interface MnemonicSpaceProps {
+  number: number;
+}
+
+export interface BackgroundProps {
+  backgroundImage?: string;
+  color: string;
+}
