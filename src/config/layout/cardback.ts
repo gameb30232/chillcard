@@ -37,64 +37,53 @@ export const createCardBackLayout = (orientation: CardOrientation) => {
         ] as const satisfies Corner[],
       },
 
+      header: {
+        marginBottom: baseConstants.spacing.base,
+        padding: baseConstants.padding,
+        title: {
+          fontSize: baseConstants.typography.subtitle,
+          opacity: 0.9,
+          letterSpacing: '0.02em',
+          lineHeight: 1.2,
+        },
+        subtitle: {
+          fontSize: baseConstants.typography.subtitle * 0.8,
+          opacity: 0.6,
+          letterSpacing: '0.02em',
+          lineHeight: 1.2,
+        },
+        text: {
+          title: "Recovery Phrase",
+          wordCountSuffix: "words",
+        }
+      },
+
+      grid: {
+        padding: baseConstants.padding,
+        gap: baseConstants.spacing.base,
+        columns: orientation === 'horizontal' ? 12 : 8,
+        rows: orientation === 'horizontal' ? 2 : 3,
+        fontSize: baseConstants.typography.address,
+        lineHeight: 1.2,
+        opacity: 0.8,
+      },
+
+      footer: {
+        marginTop: baseConstants.spacing.base,
+        padding: baseConstants.padding,
+        fontSize: baseConstants.typography.subtitle * 0.6,
+        opacity: 0.6,
+        letterSpacing: '0.02em',
+        lineHeight: 1.2,
+        text: {
+          instructions: "Keep this recovery phrase in a safe place. It's the only way to recover your wallet if you lose access.",
+        }
+      },
+
       text: {
         title: "Recovery Phrase",
         wordCountSuffix: "words",
         instructions: "Write your recovery phrase here and keep it safe"
-      },
-
-      header: {
-        title: {
-          fontSize: 11,
-          opacity: 0.9,
-        },
-        subtitle: {
-          fontSize: 9,
-          color: 'gray-400',
-        },
-      },
-
-      grid: {
-        gap: {
-          x: 12,
-          y: 5,
-        },
-        numberLabel: {
-          indent: 10,
-          fontSize: 8,
-          color: 'gray-500',
-        },
-        line: {
-          color: 'gray-700/30',
-        },
-        layout: {
-          horizontal: {
-            12: {
-              columns: 3,
-              fontSize: 16,
-            },
-            24: {
-              columns: 4,
-              fontSize: 10,
-            }
-          },
-          vertical: {
-            12: {
-              columns: 2,
-              fontSize: 16,
-            },
-            24: {
-              columns: 2,
-              fontSize: 9,
-            }
-          }
-        }
-      },
-
-      footer: {
-        fontSize: 7,
-        color: 'gray-400',
-        marginTop: 4,
       },
     },
 

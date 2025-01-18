@@ -44,35 +44,41 @@ export const CardFront = ({
           <PopoverTrigger asChild>
             <div className="interactive-element group">
               <div 
-                className="flex items-center gap-3 mb-2"
+                className="flex items-center"
                 style={{
                   position: 'absolute',
                   left: logo.x,
                   top: logo.y,
+                  gap: logo.gap,
                 }}
               >
                 <div 
-                  className="bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center hover:bg-white/20 transition-colors"
+                  className="bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors"
                   style={{
                     width: logo.width,
                     height: logo.height,
+                    borderRadius: logo.borderRadius,
                   }}
                 >
                   <img
                     src={chain.logo}
                     alt={chain.symbol}
-                    className="w-8 h-8"
+                    style={{
+                      width: logo.imageSize,
+                      height: logo.imageSize
+                    }}
                   />
                 </div>
-                <div>
+                <div style={{ gap: logo.textGap }}>
                   <p
                     style={{
                       fontSize: ticker.fontSize,
                       fontWeight: ticker.fontWeight,
                       lineHeight: ticker.lineHeight,
                       maxWidth: ticker.maxWidth,
+                      opacity: ticker.opacity,
                     }}
-                    className="font-bold tracking-tight"
+                    className="font-bold tracking-tight text-white"
                   >
                     {chain.symbol}
                   </p>
@@ -83,7 +89,7 @@ export const CardFront = ({
                       opacity: coinName.opacity,
                       maxWidth: coinName.maxWidth,
                     }}
-                    className="text-white/70"
+                    className="text-white"
                   >
                     {chain.name}
                   </p>
@@ -112,7 +118,7 @@ export const CardFront = ({
         </Popover>
 
         <div 
-          className="absolute font-mono"
+          className="absolute font-mono text-white"
           style={{
             left: walletAddress.x,
             top: walletAddress.y,
@@ -120,6 +126,8 @@ export const CardFront = ({
             fontSize: walletAddress.fontSize,
             lineHeight: walletAddress.lineHeight,
             fontFamily: walletAddress.fontFamily,
+            opacity: walletAddress.opacity,
+            letterSpacing: walletAddress.letterSpacing,
           }}
         >
           {firstHalf}
@@ -128,13 +136,14 @@ export const CardFront = ({
         </div>
 
         <div 
-          className="absolute bg-white rounded-lg overflow-hidden"
+          className="absolute bg-white overflow-hidden"
           style={{
             left: qrCode.x,
             top: qrCode.y,
             width: qrCode.width,
             height: qrCode.height,
             padding: qrCode.padding,
+            borderRadius: qrCode.borderRadius,
           }}
         >
           <QRCode address={address} isVertical={orientation === "vertical"} />

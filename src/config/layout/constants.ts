@@ -4,14 +4,13 @@ export const baseConstants = {
   logoSize: 48,
   qrSize: 92,
   spacing: {
+    small: 8,
     base: 16,
     double: 32,
   },
-  fontSize: {
-    sm: 14,
-    xl: 24,
+  typography: {
+    title: 24,
+    subtitle: 14,
+    address: 14,
   },
-  lineHeight: {
-    normal: 1,
-  }
 } as const;

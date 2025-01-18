@@ -6,37 +6,66 @@ import { createCardBackLayout } from "@/config/layout";
 
 export const CardBack = ({ mnemonicLength, orientation }: CardBackProps) => {
   const { cardLayout } = createCardBackLayout(orientation);
-  const { header, text } = cardLayout;
+  const { header, grid, footer } = cardLayout;
 
   return (
     <div className="relative h-full">
       <div className="relative z-10 h-full flex flex-col">
-        <div className="flex items-center justify-between mb-1 px-1">
+        <div 
+          className="flex items-center justify-between"
+          style={{
+            marginBottom: header.marginBottom,
+            padding: header.padding,
+          }}
+        >
           <h3 
-            className="text-white/90 font-medium"
+            className="text-white font-medium"
             style={{ 
               fontSize: header.title.fontSize,
-              opacity: header.title.opacity
+              opacity: header.title.opacity,
+              letterSpacing: header.title.letterSpacing,
             }}
           >
-            {text.title}
+            {header.text.title}
           </h3>
           <span 
             className="text-gray-400"
-            style={{ fontSize: header.subtitle.fontSize }}
+            style={{ 
+              fontSize: header.subtitle.fontSize,
+              opacity: header.subtitle.opacity,
+            }}
           >
-            {mnemonicLength} {text.wordCountSuffix}
+            {mnemonicLength} {header.text.wordCountSuffix}
           </span>
         </div>
 
-        <MnemonicGrid mnemonicLength={mnemonicLength} isVertical={orientation === "vertical"} />
+        <div style={{ 
+          padding: grid.padding,
+          gap: grid.gap,
+        }}>
+          <MnemonicGrid 
+            mnemonicLength={mnemonicLength} 
+            isVertical={orientation === "vertical"} 
+          />
+        </div>
 
-        <div className="mt-1 text-center">
+        <div 
+          className="text-center"
+          style={{
+            marginTop: footer.marginTop,
+            padding: footer.padding,
+          }}
+        >
           <p 
             className="text-gray-400"
-            style={{ fontSize: cardLayout.footer.fontSize }}
+            style={{ 
+              fontSize: footer.fontSize,
+              opacity: footer.opacity,
+              letterSpacing: footer.letterSpacing,
+              lineHeight: footer.lineHeight,
+            }}
           >
-            {text.instructions}
+            {footer.text.instructions}
           </p>
         </div>
       </div>
